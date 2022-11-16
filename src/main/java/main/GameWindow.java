@@ -1,3 +1,6 @@
+//Leonorico Eduardo de Paula Borges (202135032)
+//Lucas Henrique de Araujo Cardoso (202135038)
+//Pedro Lucas Botelho Freitas (202135040)
 /*
 Nesta classe, terá as configurações do JFrame
 Não será só essa classe que irá renderizar os conteúdos do jogo

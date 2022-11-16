@@ -1,2 +1,6 @@
-dcc025/jogo/Jogo.class
-main/MainClass.class
+main\Game.class
+main\GamePanel.class
+main\MainClass.class
+inputs\KeyboardInputs.class
+main\GameWindow.class
+inputs\MouseInputs.class

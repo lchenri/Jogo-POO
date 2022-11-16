@@ -1,3 +1,6 @@
+//Leonorico Eduardo de Paula Borges (202135032)
+//Lucas Henrique de Araujo Cardoso (202135038)
+//Pedro Lucas Botelho Freitas (202135040)
 /*
 Vai renderizar o que vai aparecer na GameWindow
  */
@@ -37,6 +40,10 @@ public class GamePanel extends JPanel {
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.fillRect(100 + xDelta, 100 + yDelta, 200, 50);
+        g.fillRect(100 + xDelta, 100 + yDelta, 50, 50);
     } // Devido a algumas limitações, esse método nos permite desenhar dentro do JFrame
+    
+    public void exit() {
+        System.exit(0);
+    }
 }

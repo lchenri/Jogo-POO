@@ -1,3 +1,6 @@
+//Leonorico Eduardo de Paula Borges (202135032)
+//Lucas Henrique de Araujo Cardoso (202135038)
+//Pedro Lucas Botelho Freitas (202135040)
 /*
 Todas as entradas do teclado
  */
@@ -25,18 +28,20 @@ public class KeyboardInputs implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
-                gPanel.changeYDelta(-5);
+                gPanel.changeYDelta(-5); //ao pressionar a tecla 'W', o personagem é movido para cima
                 break;
             case KeyEvent.VK_A:
-                gPanel.changeXDelta(-5);
+                gPanel.changeXDelta(-5); //ao pressionar a tecla 'W', o personagem é movido para esquerda
                 break;
             case KeyEvent.VK_S:
-                gPanel.changeYDelta(+5);
+                gPanel.changeYDelta(+5); //ao pressionar a tecla 'W', o personagem é movido para baixo
                 break;
             case KeyEvent.VK_D:
-                gPanel.changeXDelta(+5);
+                gPanel.changeXDelta(+5); //ao pressionar a tecla 'W', o personagem é movido para direita
                 break;
-
+            case KeyEvent.VK_ESCAPE: //ao pressionar a tecla 'ESC', o jogo é encerrado
+                gPanel.exit();
+                break;
         }
     }
 

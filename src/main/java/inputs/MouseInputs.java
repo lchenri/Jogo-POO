@@ -1,3 +1,6 @@
+//Leonorico Eduardo de Paula Borges (202135032)
+//Lucas Henrique de Araujo Cardoso (202135038)
+//Pedro Lucas Botelho Freitas (202135040)
 /*
 Reconhece as entradas do mouse
 */
@@ -11,7 +14,7 @@ public class MouseInputs implements MouseListener,MouseMotionListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        System.out.println("clicou no mouse");
+        //System.out.println("clicou no mouse");
     }
 
     @Override
@@ -36,7 +39,7 @@ public class MouseInputs implements MouseListener,MouseMotionListener{
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        System.out.println("Mexeu o mouse");
+        //System.out.println("Mexeu o mouse");
     }
     
 }
