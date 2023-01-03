@@ -7,6 +7,7 @@ package inputs;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import main.GamePanel;
+import static utilz.Constants.Directions.*;
 
 public class KeyboardInputs implements KeyListener {
 
@@ -25,17 +26,18 @@ public class KeyboardInputs implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
-                gamePanel.changeYDelta(-5); //ao pressionar a tecla 'W', o personagem é movido para cima
+                gamePanel.setDirection(UP);
                 break;
             case KeyEvent.VK_A:
-                gamePanel.changeXDelta(-5); //ao pressionar a tecla 'A', o personagem é movido para esquerda
+                gamePanel.setDirection(LEFT);
                 break;
             case KeyEvent.VK_S:
-                gamePanel.changeYDelta(+5); //ao pressionar a tecla 'S', o personagem é movido para baixo
+                gamePanel.setDirection(DOWN);
                 break;
             case KeyEvent.VK_D:
-                gamePanel.changeXDelta(+5); //ao pressionar a tecla 'D', o personagem é movido para direita
+                gamePanel.setDirection(RIGHT);
                 break;
+            //ao pressionar as teclas acima, a direcao é aplicada e o movimento é feito conforme a direcao
             case KeyEvent.VK_ESCAPE: //ao pressionar a tecla 'ESC', o jogo é encerrado
                 gamePanel.exit();
                 break;
@@ -44,6 +46,12 @@ public class KeyboardInputs implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_W:
+            case KeyEvent.VK_A:
+            case KeyEvent.VK_S:
+            case KeyEvent.VK_D:
+                gamePanel.setMoving(false); //caso solte a tecla, retorna movimento falso e para o personagem
+        }
     }
 }
