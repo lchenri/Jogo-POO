@@ -4,6 +4,8 @@
 
 package main;
 
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import javax.swing.JFrame;
 
 public class GameWindow {
@@ -18,8 +20,19 @@ public class GameWindow {
         jframe.setResizable(false); //evita a janela mudar de tamanho
         jframe.pack(); //adequa janela ao tamanho do panel
         jframe.setLocationRelativeTo(null); //janela no centro da tela
-        
         jframe.setVisible(true); //mostra janela
+        jframe.addWindowFocusListener(new WindowFocusListener() {
+            @Override
+            public void windowGainedFocus(WindowEvent e) {
+
+            }
+
+            @Override
+            public void windowLostFocus(WindowEvent e) {
+                gamePanel.getGame().windowFocusLost(); //caso a janela perca o foco, o personagem para
+            }
+            
+        });
     }
 
 }

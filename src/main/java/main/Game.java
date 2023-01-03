@@ -5,25 +5,44 @@
 package main;
 
 //implementa interface Runnable para executar o loop de jogo numa nova Thread
+
+import entities.Player;
+import java.awt.Graphics;
+
 public class Game implements Runnable {
 
     private GameWindow gameWindow; //janela
     private GamePanel gamePanel; //cena (pintura/jogo)
     private Thread gameThread; //nova thread ("mini-processo")
     private final int FPS_SET = 120; //constante pra FPS
+    
+    private Player player;
 
     //Construtor
     public Game() {
-        gamePanel = new GamePanel();
+        initClasses();
+        gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
         gamePanel.setFocusable(true);
         gamePanel.requestFocus(); //foca no jogo
         startGameLoop(); //executa o loop
     }
+
+    private void initClasses() {
+        player = new Player(200,200);
+    }
     
     private void startGameLoop() {
         gameThread = new Thread(this);
         gameThread.start();
+    }
+    
+    public void update() {
+        player.update();
+    }
+    
+    public void render(Graphics g) {
+        player.render(g);
     }
 
     //executa o loop e o fps counter
@@ -42,6 +61,7 @@ public class Game implements Runnable {
             //loop
             now = System.nanoTime();
             if(now - lastFrame >= timePerFrame) {
+                update();
                 gamePanel.repaint();
                 lastFrame = now;
                 frames++;
@@ -54,5 +74,13 @@ public class Game implements Runnable {
                 frames = 0;
             }
         }
+    }
+
+    public void windowFocusLost() {
+        player.resetDirBooleans();
+    }
+    
+    public Player getPlayer() {
+        return player;
     }
 }

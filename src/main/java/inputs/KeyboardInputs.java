@@ -26,16 +26,16 @@ public class KeyboardInputs implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
-                gamePanel.setDirection(UP);
+                gamePanel.getGame().getPlayer().setUp(true);
                 break;
             case KeyEvent.VK_A:
-                gamePanel.setDirection(LEFT);
+                gamePanel.getGame().getPlayer().setLeft(true);
                 break;
             case KeyEvent.VK_S:
-                gamePanel.setDirection(DOWN);
+                gamePanel.getGame().getPlayer().setDown(true);
                 break;
             case KeyEvent.VK_D:
-                gamePanel.setDirection(RIGHT);
+                gamePanel.getGame().getPlayer().setRight(true);
                 break;
             //ao pressionar as teclas acima, a direcao é aplicada e o movimento é feito conforme a direcao
             case KeyEvent.VK_ESCAPE: //ao pressionar a tecla 'ESC', o jogo é encerrado
@@ -48,10 +48,18 @@ public class KeyboardInputs implements KeyListener {
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
+                gamePanel.getGame().getPlayer().setUp(false);
+                break;
             case KeyEvent.VK_A:
+                gamePanel.getGame().getPlayer().setLeft(false);
+                break;
             case KeyEvent.VK_S:
+                gamePanel.getGame().getPlayer().setDown(false);
+                break;
             case KeyEvent.VK_D:
-                gamePanel.setMoving(false); //caso solte a tecla, retorna movimento falso e para o personagem
+                gamePanel.getGame().getPlayer().setRight(false);
+                break;
         }
+        //Ao soltar a tecla, o movimento para naquela direcao
     }
 }
