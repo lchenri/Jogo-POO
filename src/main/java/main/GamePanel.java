@@ -12,6 +12,9 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import static main.Game.GAME_HEIGHT;
+import static main.Game.GAME_WIDTH;  // No setPanelSize(classe GamePanel) colocar: Dimension size = new Dimension (GAME_WIDTH,GAME_HEIGHT) 
+
 public class GamePanel extends JPanel {
 
     private MouseInputs mouseInputs;
