@@ -47,8 +47,9 @@ public class GamePanel extends JPanel {
     public Game getGame() {
         return game;
     }
-    
+
     public void exit() {
         System.exit(0);
     }
+    
 }

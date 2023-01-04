@@ -45,11 +45,14 @@ public class Game implements Runnable {
         player.render(g);
     }
 
-    //executa o loop e o fps counter
+    //Implementa a thread no qual o game vai ficar em loop
     @Override
     public void run() {
         
+        //devido a quantidade de tempo ser mínima entre um frame e outro, durante o loop do game, buscando pela internet foi observado que usar nanosegundos seria melhor do que milisegundos
         double timePerFrame = 1000000000.0 / FPS_SET;
+        
+        //dentro do loop vai ser realizada uma diferença entre o frame atual menos o frame anterior
         long lastFrame = System.nanoTime();
         long now;
         
@@ -67,7 +70,11 @@ public class Game implements Runnable {
                 frames++;
             }
             
-            //fps counter
+            //contador de frames:
+            //currentTimeMilis nos retorna a quantidade de milisegundos desde o 'instante zero', também chamado de Unix Epoch, até a data atual
+            //pegamos ele e diminuímos com o lastCheck, 
+            //lastCheck é o tempo desde a última vez que entrou dentro do if
+            //frames = 0 : reseta o contador de frame. Se não, ele mostraria a quantidade de frames gerados desde a inicialização do programa
             if(System.currentTimeMillis() - lastCheck >= 1000) {
                 lastCheck = System.currentTimeMillis();
                 System.out.println("FPS: " + frames);
@@ -83,4 +90,4 @@ public class Game implements Runnable {
     public Player getPlayer() {
         return player;
     }
-}
+}    
