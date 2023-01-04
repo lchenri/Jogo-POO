@@ -16,6 +16,8 @@ public class Game implements Runnable {
     private Thread gameThread; //nova thread ("mini-processo")
     private final int FPS_SET = 120; //Quantidade de FPS que o jogo vai rodar
     private final int UPS_SET = 200; //Quantidade entre os updates visando estabilidade
+
+    //Aqui serão inseridas uma série de constantes que serão criadas no level e darão funcionalidade ao codigo.
     
     private Player player;
 
@@ -30,7 +32,9 @@ public class Game implements Runnable {
     }
 
     private void initClasses() {
-        player = new Player(200,200);
+        //levelManager = new LevelManager(this); acima do player
+        player = new Player(200,200,(int)(64 * SCALE),(int)(40 * SCALE));
+        //player.loadLevelData(levelManager.getCurrentLevel().getLevelData());
     }
 
     private void startGameLoop() {
