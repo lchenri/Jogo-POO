@@ -8,15 +8,23 @@ package main;
 
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
+import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.JPanel;
 
 public class GamePanel extends JPanel {
 
     private MouseInputs mouseInputs; // usamos esse método para colocar mouseInputs nos dois Listeners
-    private int xDelta = 0;
-    private int yDelta = 0;
+    private float xDelta = 100;
+    private float yDelta = 100;
+    private int frames = 0;
+    private long lastCheck = 0;
 
+    //teste
+    private float xDir = 0.005f, yDir = 0.005f;
+    //
+    
+    
     //construtor
     public GamePanel() {
         mouseInputs = new MouseInputs(); // cria o objeto mouseInputs, para não dar erro nos dois mouseListener's
@@ -27,23 +35,52 @@ public class GamePanel extends JPanel {
 
     public void changeXDelta(int value) {
         this.xDelta += value;
-        repaint(); // toda vez que apertamos algum botão, atualiza o desenho da tela
+        // toda vez que apertamos algum botão, atualiza o desenho da tela
     }
 
     public void changeYDelta(int value) {
         this.yDelta += value;
-        repaint(); // toda vez que apertamos algum botão, atualiza o desenho da tela
+        // toda vez que apertamos algum botão, atualiza o desenho da tela
     }
-    
-    // ambos os métodos anteriores serão utilizados para aumentar ou decrementar a posição do quadrado na tela
 
+    // ambos os métodos anteriores serão utilizados para aumentar ou decrementar a posição do quadrado na tela
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
-        g.fillRect(100 + xDelta, 100 + yDelta, 50, 50);
+        //apenas para teste
+        //updateRectange();
+        g.setColor(new Color(150,20,90, 255));
+        //
+        
+        g.fillRect((int) xDelta, (int)yDelta, 50, 50);
+
+        
+        //contador de frames: 
+        //currentTimeMilis nos retorna a quantidade de milisegundos desde o 'instante zero', também chamado de Unix Epoch, até a data atual
+        //pegamos ele e diminuímos com o lastCheck, 
+        //lastCheck é o tempo desde a última vez que entrou dentro do if
+        //frames = 0 : reseta o contador de frame. Se não, ele mostraria a quantidade de frames gerados desde a inicialização do programa
+        frames++;
+        if(System.currentTimeMillis() - lastCheck >= 1000){
+            lastCheck = System.currentTimeMillis();
+            System.out.println("FPS " + frames);
+            frames=0;
+        }
+
     } // Devido a algumas limitações, esse método nos permite desenhar dentro do JFrame
-    
+
     public void exit() {
         System.exit(0);
     }
+
+    private void updateRectange() {
+        xDelta+= xDir;
+        if(xDelta > 400 || xDelta <0)
+            xDir *= -1;
+        
+        yDelta+=yDir;
+        if(yDelta > 400 || yDelta < 0)
+            yDir *=-1;
+    }
+    
 }
