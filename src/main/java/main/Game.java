@@ -8,6 +8,7 @@ package main;
 
 import entities.Player;
 import java.awt.Graphics;
+import levels.LevelManager;
 
 public class Game implements Runnable {
 
@@ -15,19 +16,10 @@ public class Game implements Runnable {
     private GamePanel gamePanel; //cena (pintura/jogo)
     private Thread gameThread; //nova thread ("mini-processo")
     private final int FPS_SET = 120; //constante pra FPS
-    
-    private Player player;
-    
-    
-     //Novo objeto responsavel por desenhar cenario do jogo
-    ///private LevelManager levelManager;
-    // No initClasses colocar: levelManager = new LevelManager(this);
-    // No update colocar: levelManager.update();
-    // No render colocar: levelManager.draw(g) em cima do player;
-    
-    
-    
-    //Dimencionamentos finais de todo o jogo
+    private Player player; //objeto personagem
+    private LevelManager levelManager; //novo objeto responsavel por desenhar cenario do jogo
+
+    //Dimensionamentos de todo o jogo
     public final static int TILES_DEFAULT_SIZE = 32; //Tamanho padrao dos blocos
     public final static float SCALE = 1.5f;
     public final static int TILES_IN_WIDTH = 26; //Largura dos blocos
@@ -35,13 +27,13 @@ public class Game implements Runnable {
     public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE); //Tamanho real dos blocos
     public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH; // Largura do Jogo
     public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT; // Altura do jogo
-    // No setPanelSize(classe GamePanel) colocar: Dimension size = new Dimension (GAME_WIDTH,GAME_HEIGHT) 
-
+   
     //Construtor
     public Game() {
         initClasses();
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
+        levelManager = new LevelManager(this);
         gamePanel.setFocusable(true);
         gamePanel.requestFocus(); //foca no jogo
         startGameLoop(); //executa o loop
@@ -58,9 +50,11 @@ public class Game implements Runnable {
     
     public void update() {
         player.update();
+        levelManager.update();
     }
     
     public void render(Graphics g) {
+        levelManager.draw(g);
         player.render(g);
     }
 
