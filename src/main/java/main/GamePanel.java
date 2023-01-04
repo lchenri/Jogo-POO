@@ -43,6 +43,7 @@ public class GamePanel extends JPanel {
         // toda vez que apertamos algum botão, atualiza o desenho da tela
     }
 
+
     // ambos os métodos anteriores serão utilizados para aumentar ou decrementar a posição do quadrado na tela
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -55,17 +56,8 @@ public class GamePanel extends JPanel {
         g.fillRect((int) xDelta, (int)yDelta, 50, 50);
 
         
-        //contador de frames: 
-        //currentTimeMilis nos retorna a quantidade de milisegundos desde o 'instante zero', também chamado de Unix Epoch, até a data atual
-        //pegamos ele e diminuímos com o lastCheck, 
-        //lastCheck é o tempo desde a última vez que entrou dentro do if
-        //frames = 0 : reseta o contador de frame. Se não, ele mostraria a quantidade de frames gerados desde a inicialização do programa
-        frames++;
-        if(System.currentTimeMillis() - lastCheck >= 1000){
-            lastCheck = System.currentTimeMillis();
-            System.out.println("FPS " + frames);
-            frames=0;
-        }
+
+
 
     } // Devido a algumas limitações, esse método nos permite desenhar dentro do JFrame
 
