@@ -37,7 +37,10 @@ public class KeyboardInputs implements KeyListener {
             case KeyEvent.VK_D:
                 gamePanel.getGame().getPlayer().setRight(true);
                 break;
-            //ao pressionar as teclas acima, a direcao é aplicada e o movimento é feito conforme a direcao
+            case KeyEvent.VK_SPACE:
+                gamePanel.getGame().getPlayer().setJump(true);
+                break;
+            //ao pressionar as teclas a acao é realizada
             case KeyEvent.VK_ESCAPE: //ao pressionar a tecla 'ESC', o jogo é encerrado
                 gamePanel.exit();
                 break;
@@ -59,7 +62,10 @@ public class KeyboardInputs implements KeyListener {
             case KeyEvent.VK_D:
                 gamePanel.getGame().getPlayer().setRight(false);
                 break;
+            case KeyEvent.VK_SPACE:
+                gamePanel.getGame().getPlayer().setJump(false);
+                break;
         }
-        //Ao soltar a tecla, o movimento para naquela direcao
+        //Ao soltar a tecla, a acao para
     }
 }
