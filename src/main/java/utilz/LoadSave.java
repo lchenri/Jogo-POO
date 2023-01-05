@@ -19,7 +19,7 @@ public class LoadSave {
     public static final String PLAYER_ATLAS = "player_sprites.png"; //No lugar do name colocar o arquivo imagem JOGADOR (Ex: player_sprites.png)
     public static final String LEVEL_ATLAS = "outside_sprites.png"; //No lugar do name colocar o arquivo imagem CENARIO(Ex: outside_sprites.png)
     public static final String LEVEL_ONE_DATA = "level_one.png"; //No lugar do name colocar o arquivo imagem NIVEL(Ex: level_one.png)
-    public static final String PLAYING_BG_IMG = "level_one.png"; //No lugar do name colocar o arquivo imagem FUNDO(Ex: level_one.png)
+    //public static final String PLAYING_BG_IMG = "level_one.png"; //No lugar do name colocar o arquivo imagem FUNDO(Ex: level_one.png)
     //Na classe playing crie: BufferedImage backgroundImg;
     //No construtor de playing coloque: LoadSave.GetSpriteAtlas(LoadSave.PLAYING_BG_IMG);
     //No draw coloque g.drawImage(backgroundImg,0,0, Game.GAME_WIDTH, Game.GAME_HEIGHT,null);
@@ -29,7 +29,7 @@ public class LoadSave {
         BufferedImage img = null;
         File file = new File("res/" + nomeArquivo);
         System.out.println(file);
-        //InputStream is = LoadSave.class.getResourceAsStream("/" + nomeArquivo);
+        //nputStream is = LoadSave.class.getResourceAsStream("/" + nomeArquivo);
         try{
             //importa o arquivo de sprites do personagem
             //img = ImageIO.read(is);

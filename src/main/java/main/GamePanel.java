@@ -6,8 +6,7 @@ package main;
 
 import inputs.KeyboardInputs;
 import inputs.MouseInputs;
-import static main.Game.GAME_HEIGHT;
-import static main.Game.GAME_WIDTH;  // No setPanelSize(classe GamePanel) colocar: Dimension size = new Dimension (GAME_WIDTH,GAME_HEIGHT) 
+  // No setPanelSize(classe GamePanel) colocar: Dimension size = new Dimension (GAME_WIDTH,GAME_HEIGHT) 
 
 
 

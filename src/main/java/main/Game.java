@@ -46,6 +46,7 @@ public class Game implements Runnable {
 
     private void initClasses() {
         player = new Player(200,200);
+        levelManager = new LevelManager(this);
     }
 
     private void startGameLoop() {
