@@ -1,20 +1,28 @@
 //Leonorico Eduardo de Paula Borges (202135032)
 //Lucas Henrique de Araujo Cardoso (202135038)
 //Pedro Lucas Botelho Freitas (202135040)
-/*
-Reconhece as entradas do mouse
-*/
+
 package inputs;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import main.GamePanel;
+
 public class MouseInputs implements MouseListener,MouseMotionListener{
+    
+    private GamePanel gamePanel;
+    
+    public MouseInputs(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+    }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        //System.out.println("clicou no mouse");
+        if(e.getButton() == MouseEvent.BUTTON1)
+            gamePanel.getGame().getPlayer().setAttacking(true); //ataca
+
     }
 
     @Override
@@ -39,7 +47,6 @@ public class MouseInputs implements MouseListener,MouseMotionListener{
 
     @Override
     public void mouseMoved(MouseEvent e) {
-        //System.out.println("Mexeu o mouse");
     }
     
 }

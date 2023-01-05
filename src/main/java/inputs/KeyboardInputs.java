@@ -1,23 +1,22 @@
 //Leonorico Eduardo de Paula Borges (202135032)
 //Lucas Henrique de Araujo Cardoso (202135038)
 //Pedro Lucas Botelho Freitas (202135040)
-/*
-Todas as entradas do teclado
- */
+
 package inputs;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import main.GamePanel;
 
+import static utilz.Constants.Directions.*;
+
 public class KeyboardInputs implements KeyListener {
 
-    private GamePanel gPanel;
+    private GamePanel gamePanel;
 
-    public KeyboardInputs(GamePanel gPanel) {
-        this.gPanel = gPanel;
-    } // toda vez que algum botão for apertado, usamos esse método para 
-    // incrementar ou decrementar o xDelta ou yDelta dentro de GamePa
+    public KeyboardInputs(GamePanel gamePanel) {
+        this.gamePanel = gamePanel;
+    }
 
     @Override
     public void keyTyped(KeyEvent e) {
@@ -28,19 +27,20 @@ public class KeyboardInputs implements KeyListener {
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
-                gPanel.changeYDelta(-5); //ao pressionar a tecla 'W', o personagem é movido para cima
+                gamePanel.getGame().getPlayer().setUp(true);
                 break;
             case KeyEvent.VK_A:
-                gPanel.changeXDelta(-5); //ao pressionar a tecla 'W', o personagem é movido para esquerda
+                gamePanel.getGame().getPlayer().setLeft(true);
                 break;
             case KeyEvent.VK_S:
-                gPanel.changeYDelta(+5); //ao pressionar a tecla 'W', o personagem é movido para baixo
+                gamePanel.getGame().getPlayer().setDown(true);
                 break;
             case KeyEvent.VK_D:
-                gPanel.changeXDelta(+5); //ao pressionar a tecla 'W', o personagem é movido para direita
+                gamePanel.getGame().getPlayer().setRight(true);
                 break;
+            //ao pressionar as teclas acima, a direcao é aplicada e o movimento é feito conforme a direcao
             case KeyEvent.VK_ESCAPE: //ao pressionar a tecla 'ESC', o jogo é encerrado
-                gPanel.exit();
+                gamePanel.exit();
                 break;
         }
     }
@@ -48,5 +48,20 @@ public class KeyboardInputs implements KeyListener {
     @Override
     public void keyReleased(KeyEvent e) {
 
+        switch (e.getKeyCode()) {
+            case KeyEvent.VK_W:
+                gamePanel.getGame().getPlayer().setUp(false);
+                break;
+            case KeyEvent.VK_A:
+                gamePanel.getGame().getPlayer().setLeft(false);
+                break;
+            case KeyEvent.VK_S:
+                gamePanel.getGame().getPlayer().setDown(false);
+                break;
+            case KeyEvent.VK_D:
+                gamePanel.getGame().getPlayer().setRight(false);
+                break;
+        }
+        //Ao soltar a tecla, o movimento para naquela direcao
     }
 }
