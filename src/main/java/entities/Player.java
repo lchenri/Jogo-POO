@@ -11,6 +11,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import static utilz.Constants.PlayerConstants.*;
 import static utilz.Constants.PlayerConstants.getSpriteAmount;
+import utilz.LoadSave;
 
 public class Player extends Entity {
     
@@ -93,21 +94,13 @@ public class Player extends Entity {
     
     private void loadAnimations() {
         
-        File file = new File("res/player_sprites.png");
-        System.out.println(file);
-        try {
-            //importa o arquivo de sprites do personagem
-            BufferedImage img = ImageIO.read(file);
-            animations = new BufferedImage[9][6];
-        
-            //Divide em uma matriz todos os diferentes sprites
-            for(int i = 0; i < animations.length; i++)
-                for(int j = 0; j < animations[i].length; j++) {
-                    animations[i][j] = img.getSubimage(j*64, i*40, 64, 40);
-                }
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
+        BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
+        animations = new BufferedImage[9][6];
+
+        //Divide em uma matriz todos os diferentes sprites
+        for(int i = 0; i < animations.length; i++)
+            for(int j = 0; j < animations[i].length; j++)
+                animations[i][j] = img.getSubimage(j*64, i*40, 64, 40);
 
     }
 
