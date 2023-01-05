@@ -7,6 +7,7 @@ package inputs;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import main.GamePanel;
+
 import static utilz.Constants.Directions.*;
 
 public class KeyboardInputs implements KeyListener {
@@ -49,6 +50,7 @@ public class KeyboardInputs implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
+
         switch (e.getKeyCode()) {
             case KeyEvent.VK_W:
                 gamePanel.getGame().getPlayer().setUp(false);

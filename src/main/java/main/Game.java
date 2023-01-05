@@ -4,11 +4,11 @@
 
 package main;
 
-//implementa interface Runnable para executar o loop de jogo numa nova Thread
-
 import entities.Player;
 import java.awt.Graphics;
+import levels.LevelManager;
 
+//implementa interface Runnable para executar o loop de jogo numa nova Thread
 public class Game implements Runnable {
 
     private GameWindow gameWindow; //janela
@@ -17,24 +17,33 @@ public class Game implements Runnable {
     private final int FPS_SET = 120; //Quantidade de FPS que o jogo vai rodar
     private final int UPS_SET = 200; //Quantidade entre os updates visando estabilidade
 
-    //Aqui serão inseridas uma série de constantes que serão criadas no level e darão funcionalidade ao codigo.
+    private Player player; //objeto personagem
+    private LevelManager levelManager; //novo objeto responsavel por desenhar cenario do jogo
     
-    private Player player;
-
+    //Dimensionamentos de todo o jogo
+    public final static int TILES_DEFAULT_SIZE = 32; //Tamanho padrao dos blocos
+    public final static float SCALE = 1.5f;
+    public final static int TILES_IN_WIDTH = 26; //Largura dos blocos
+    public final static int TILES_IN_HEIGHT = 14; // Altura dos blocos
+    public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE); //Tamanho real dos blocos
+    public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH; // Largura do Jogo
+    public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT; // Altura do jogo
+    
     //Construtor
     public Game() {
         initClasses();
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
+        levelManager = new LevelManager(this);
         gamePanel.setFocusable(true);
         gamePanel.requestFocus(); //foca no jogo
         startGameLoop(); //executa o loop
     }
 
     private void initClasses() {
-        //levelManager = new LevelManager(this); acima do player
+        levelManager = new LevelManager(this);
         player = new Player(200,200,(int)(64 * SCALE),(int)(40 * SCALE));
-        //player.loadLevelData(levelManager.getCurrentLevel().getLevelData());
+        player.loadLevelData(levelManager.getCurrentLevel().getLevelData());
     }
 
     private void startGameLoop() {
@@ -44,9 +53,11 @@ public class Game implements Runnable {
     
     public void update() {
         player.update();
+        levelManager.update();
     }
     
     public void render(Graphics g) {
+        levelManager.draw(g);
         player.render(g);
     }
 

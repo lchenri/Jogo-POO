@@ -7,6 +7,7 @@ package inputs;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
 import main.GamePanel;
 
 public class MouseInputs implements MouseListener,MouseMotionListener{
@@ -21,6 +22,7 @@ public class MouseInputs implements MouseListener,MouseMotionListener{
     public void mouseClicked(MouseEvent e) {
         if(e.getButton() == MouseEvent.BUTTON1)
             gamePanel.getGame().getPlayer().setAttacking(true); //ataca
+
     }
 
     @Override
@@ -45,7 +47,6 @@ public class MouseInputs implements MouseListener,MouseMotionListener{
 
     @Override
     public void mouseMoved(MouseEvent e) {
-
     }
     
 }

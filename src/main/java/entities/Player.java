@@ -9,9 +9,11 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import javax.imageio.ImageIO;
+import main.Game;
 import static utilz.Constants.PlayerConstants.*;
 import static utilz.Constants.PlayerConstants.getSpriteAmount;
 import static utilz.HelpMethods.*;
+import utilz.LoadSave;
 
 public class Player extends Entity {
     
@@ -23,13 +25,11 @@ public class Player extends Entity {
     private boolean left, up, right, down, jump;
     private float playerSpeed = 2.0f;
     private int[][] lvlData;
-    //Precisa do codigo da parte do level
     private float xDrawOffset = 21 * Game.SCALE;
     private float yDrawOffset = 4 * Game.SCALE;
     
     //Jumping / Falling
     private float airSpeed = 0f;
-    //Precisa do codigo da parte do level
     private float gravity = 0.04f * Game.SCALE;
     private float jumpSpeed = -2.25f * Game.SCALE;
     private float fallSpeedAfterCollision = 0.5f * Game.SCALE;
@@ -39,7 +39,7 @@ public class Player extends Entity {
     public Player(float x, float y, int width, int height) {
         super(x, y, width, height);
         loadAnimations();
-        initHitbox(x, y, 20 * Game.SCALE, 27 * Game.SCALE); //inicializa hitbox
+        initHitbox(x, y, 20 * Game.SCALE, 26 * Game.SCALE); //inicializa hitbox
     }
     
     public void update() {
@@ -159,21 +159,13 @@ public class Player extends Entity {
     
     private void loadAnimations() {
         
-        File file = new File("res/player_sprites.png");
-        System.out.println(file);
-        try {
-            //importa o arquivo de sprites do personagem
-            BufferedImage img = ImageIO.read(file);
-            animations = new BufferedImage[9][6];
-        
-            //Divide em uma matriz todos os diferentes sprites
-            for(int i = 0; i < animations.length; i++)
-                for(int j = 0; j < animations[i].length; j++) {
-                    animations[i][j] = img.getSubimage(j*64, i*40, 64, 40);
-                }
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
+        BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
+        animations = new BufferedImage[9][6];
+
+        //Divide em uma matriz todos os diferentes sprites
+        for(int i = 0; i < animations.length; i++)
+            for(int j = 0; j < animations[i].length; j++)
+                animations[i][j] = img.getSubimage(j*64, i*40, 64, 40);
 
     }
     
