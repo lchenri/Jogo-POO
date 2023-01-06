@@ -1,12 +1,14 @@
 //Leonorico Eduardo de Paula Borges (202135032)
 //Lucas Henrique de Araujo Cardoso (202135038)
 //Pedro Lucas Botelho Freitas (202135040)
-
 package main;
 
-import entities.Player;
+
+import gamestates.Gamestate;
+import gamestates.Menu;
+import gamestates.Playing;
 import java.awt.Graphics;
-import levels.LevelManager;
+
 
 //implementa interface Runnable para executar o loop de jogo numa nova Thread
 public class Game implements Runnable {
@@ -17,9 +19,9 @@ public class Game implements Runnable {
     private final int FPS_SET = 120; //Quantidade de FPS que o jogo vai rodar
     private final int UPS_SET = 200; //Quantidade entre os updates visando estabilidade
 
-    private Player player; //objeto personagem
-    private LevelManager levelManager; //novo objeto responsavel por desenhar cenario do jogo
-    
+private Playing playing;
+private Menu menu;
+
     //Dimensionamentos de todo o jogo
     public final static int TILES_DEFAULT_SIZE = 32; //Tamanho padrao dos blocos
     public final static float SCALE = 1.5f;
@@ -28,39 +30,60 @@ public class Game implements Runnable {
     public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE); //Tamanho real dos blocos
     public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH; // Largura do Jogo
     public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT; // Altura do jogo
-    
+
     //Construtor
     public Game() {
         initClasses();
+
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
-        levelManager = new LevelManager(this);
         gamePanel.setFocusable(true);
         gamePanel.requestFocus(); //foca no jogo
+
         startGameLoop(); //executa o loop
     }
 
     private void initClasses() {
-        levelManager = new LevelManager(this);
-        player = new Player(200,200,(int)(64 * SCALE),(int)(40 * SCALE));
-        player.loadLevelData(levelManager.getCurrentLevel().getLevelData());
+        menu = new Menu(this);
+        playing = new Playing(this);
     }
 
     private void startGameLoop() {
         gameThread = new Thread(this);
         gameThread.start();
     }
-    
+
     public void update() {
-        player.update();
-        levelManager.update();
-    }
-    
-    public void render(Graphics g) {
-        levelManager.draw(g);
-        player.render(g);
+
+        //to-do:  inserçao do modo de administrador
+        switch (Gamestate.state) {
+            case MENU:
+                //menu.update();
+                menu.update();
+                break;
+            case PLAYING:
+                playing.update();
+                break;
+            default:
+                break;
+        }
     }
 
+    public void render(Graphics g) {
+
+        switch (Gamestate.state) {
+            case MENU:
+                //menu.update();
+                menu.draw(g);
+                break;
+            case PLAYING:
+                playing.draw(g);
+                break;
+            default:
+                break;
+        }
+
+    }
 
     //Implementa a thread no qual o game vai ficar em loop
     @Override
@@ -78,30 +101,28 @@ public class Game implements Runnable {
         double deltaU = 0;
         double deltaF = 0;
 
-        
         //
-
         //loop
         while (true) {
             long currentTime = System.nanoTime();
-            
+
             deltaU += (currentTime - previousTime) / timePerUpdate;
             deltaF += (currentTime - previousTime) / timePerFrame;
             previousTime = currentTime;
-            
-            if(deltaU >= 1){
+
+            if (deltaU >= 1) {
                 update();
                 updates++;
                 deltaU--;
             }
-            
-            if(deltaF >=1){
+
+            if (deltaF >= 1) {
                 gamePanel.repaint();
                 frames++;
                 deltaF--;
             }
             //a implementação dos deltas se baseia em não haver perda de tempo entre os updates e os frames
-          
+
             //contador de frames: 
             //currentTimeMilis nos retorna a quantidade de milisegundos desde o 'instante zero', também chamado de Unix Epoch, até a data atual
             //pegamos ele e diminuímos com o lastCheck, 
@@ -118,10 +139,18 @@ public class Game implements Runnable {
     }
 
     public void windowFocusLost() {
-        player.resetDirBooleans();
+        if(Gamestate.state == Gamestate.PLAYING){
+            playing.getPlayer().resetDirBooleans();
+        }
     }
     
-    public Player getPlayer() {
-        return player;
+    public Menu getMenu(){
+        return menu;
     }
-}    
+    
+    public Playing getPlaying(){
+        return playing;
+    }
+
+
+}
