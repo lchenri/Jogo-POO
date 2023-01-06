@@ -1,6 +1,5 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+Classe que define o modo de jogo, executando as acoes dos listeners e atualizando a tela de acordo
  */
 package gamestates;
 

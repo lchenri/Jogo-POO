@@ -1,7 +1,6 @@
 //Leonorico Eduardo de Paula Borges (202135032)
 //Lucas Henrique de Araujo Cardoso (202135038)
 //Pedro Lucas Botelho Freitas (202135040)
-
 package inputs;
 
 import gamestates.Gamestate;
@@ -26,7 +25,8 @@ public class KeyboardInputs implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        switch(Gamestate.state){
+        // os listeners agora, funcionam atraves do modo de jogo
+        switch (Gamestate.state) {
             case MENU:
                 gamePanel.getGame().getMenu().keyPressed(e);
                 break;
@@ -34,15 +34,15 @@ public class KeyboardInputs implements KeyListener {
                 gamePanel.getGame().getPlaying().keyPressed(e);
                 break;
             default:
-                throw new AssertionError(Gamestate.state.name());
-            
+                break;
         }
 
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
-        switch(Gamestate.state){
+        // os listeners agora, funcionam atraves do modo de jogo
+        switch (Gamestate.state) {
             case MENU:
                 gamePanel.getGame().getMenu().keyReleased(e);
                 break;
@@ -50,8 +50,7 @@ public class KeyboardInputs implements KeyListener {
                 gamePanel.getGame().getPlaying().keyReleased(e);
                 break;
             default:
-                throw new AssertionError(Gamestate.state.name());
-            
+                break;
         }
 
     }
