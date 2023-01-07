@@ -19,6 +19,9 @@ public class LoadSave {
     public static final String PLAYER_ATLAS = "player_sprites.png"; //No lugar do name colocar o arquivo imagem JOGADOR (Ex: player_sprites.png)
     public static final String LEVEL_ATLAS = "outside_sprites.png"; //No lugar do name colocar o arquivo imagem CENARIO(Ex: outside_sprites.png)
     public static final String LEVEL_ONE_DATA = "level_one.png"; //No lugar do name colocar o arquivo imagem NIVEL(Ex: level_one.png)
+    public static final String MENU_BUTTONS = "button_atlas.png";
+    public static final String MENU_BACKGROUND = "menu_background.png";
+    
     //public static final String PLAYING_BG_IMG = "level_one.png"; //No lugar do name colocar o arquivo imagem FUNDO(Ex: level_one.png)
     //Na classe playing crie: BufferedImage backgroundImg;
     //No construtor de playing coloque: LoadSave.GetSpriteAtlas(LoadSave.PLAYING_BG_IMG);
