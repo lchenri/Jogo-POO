@@ -10,6 +10,7 @@ import java.awt.event.MouseEvent;
 import levels.LevelManager;
 import main.Game;
 import static main.Game.SCALE;
+import ui.PauseOverlay;
 
 /**
  *
@@ -19,10 +20,17 @@ public class Playing extends State implements Statemethods {
 
     private Player player; //objeto personagem
     private LevelManager levelManager; //novo objeto responsavel por desenhar cenario do jogo
+    private boolean paused = false;
+    private PauseOverlay pauseOverlay;
 
     public Playing(Game game) {
         super(game);
         initClasses();
+        pauseOverlay = new PauseOverlay(this);
+    }
+
+    public void unpauseGame() {
+        paused = false;
     }
 
     private void initClasses() {
@@ -33,32 +41,49 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void update() {
-        levelManager.update();
-        player.update();
+        if (paused) {
+            pauseOverlay.update();
+        } else {
+            levelManager.update();
+            player.update();
+        }
     }
 
     @Override
     public void draw(Graphics g) {
         levelManager.draw(g);
         player.render(g);
+        if (paused) {
+            pauseOverlay.draw(g);
+        }
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(e.getButton() == MouseEvent.BUTTON1)
+        if (e.getButton() == MouseEvent.BUTTON1) {
             player.setAttacking(true); //ataca
+        }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+        if (paused) {
+            pauseOverlay.mousePressed(e);
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        if (paused) {
+            pauseOverlay.mouseReleased(e);
+        }
     }
 
     @Override
     public void mouseMoved(MouseEvent e) {
+        if (paused) {
+            pauseOverlay.mouseMoved(e);
+        }
     }
 
     @Override
@@ -79,8 +104,8 @@ public class Playing extends State implements Statemethods {
             case KeyEvent.VK_SPACE:
                 player.setJump(true);
                 break;
-            case KeyEvent.VK_BACK_SPACE:
-                Gamestate.state = Gamestate.MENU;
+            case KeyEvent.VK_ESCAPE:
+                paused = !paused;
                 break;
             //ao pressionar as teclas a acao é realizada
 //            case KeyEvent.VK_ESCAPE: //ao pressionar a tecla 'ESC', o jogo é encerrado
