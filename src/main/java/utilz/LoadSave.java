@@ -5,13 +5,16 @@
 
 package utilz;
 
+import entities.Crabby;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import main.Game;
+import static utilz.Constants.EnemyConstants.CRABBY;
 
 
 public class LoadSave {
@@ -24,6 +27,7 @@ public class LoadSave {
     public static final String PAUSE_BACKGROUND = "pause_menu.png";
     public static final String SOUND_BUTTONS = "sound_button.png";
     public static final String URM_BUTTONS = "urm_buttons.png";
+    public static final String CRABBY_SPRITE = "crabby_sprite.png";
     
     //public static final String PLAYING_BG_IMG = "level_one.png"; //No lugar do name colocar o arquivo imagem FUNDO(Ex: level_one.png)
     //Na classe playing crie: BufferedImage backgroundImg;
@@ -34,7 +38,6 @@ public class LoadSave {
         
         BufferedImage img = null;
         File file = new File("res/" + nomeArquivo);
-        System.out.println(file);
         try{
             //importa o arquivo de sprites do personagem
             img = ImageIO.read(file);
@@ -43,6 +46,20 @@ public class LoadSave {
             e.printStackTrace();
         } 
         return img;
+    }
+    
+    public static ArrayList<Crabby> getCrabs() {
+        BufferedImage img = GetSpriteAtlas(LEVEL_ONE_DATA);
+        ArrayList<Crabby> list = new ArrayList<>();
+        for(int j = 0; j < img.getHeight(); j++)
+            for(int i = 0; i < img.getWidth(); i++) {
+                Color color = new Color (img.getRGB(i, j));
+                int value = color.getGreen();
+                
+                if(value == CRABBY)
+                    list.add(new Crabby(i * Game.TILES_SIZE, j * Game.TILES_SIZE));
+            }
+        return list;
     }
    
     //GetLevelData reconhece a cor apropriada para os obstaculos do nivel

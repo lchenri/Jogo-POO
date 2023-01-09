@@ -3,6 +3,7 @@ Classe que define o modo de jogo, executando as acoes dos listeners e atualizand
  */
 package gamestates;
 
+import entities.EnemyManager;
 import entities.Player;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
@@ -20,6 +21,7 @@ public class Playing extends State implements Statemethods {
 
     private Player player; //objeto personagem
     private LevelManager levelManager; //novo objeto responsavel por desenhar cenario do jogo
+    private EnemyManager enemyManager;
     private boolean paused = false;
     private PauseOverlay pauseOverlay;
 
@@ -35,6 +37,7 @@ public class Playing extends State implements Statemethods {
 
     private void initClasses() {
         levelManager = new LevelManager(game);
+        enemyManager = new EnemyManager(this);
         player = new Player(200, 200, (int) (64 * Game.SCALE), (int) (40 * Game.SCALE));
         player.loadLevelData(levelManager.getCurrentLevel().getLevelData());
     }
@@ -46,6 +49,7 @@ public class Playing extends State implements Statemethods {
         } else {
             levelManager.update();
             player.update();
+            enemyManager.update();
         }
     }
 
@@ -53,6 +57,7 @@ public class Playing extends State implements Statemethods {
     public void draw(Graphics g) {
         levelManager.draw(g);
         player.render(g);
+        enemyManager.draw(g);
         if (paused) {
             pauseOverlay.draw(g);
         }
