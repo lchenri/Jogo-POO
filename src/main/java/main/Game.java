@@ -8,6 +8,7 @@ import gamestates.Gamestate;
 import gamestates.Menu;
 import gamestates.Playing;
 import java.awt.Graphics;
+import utilz.LoadSave;
 
 
 //implementa interface Runnable para executar o loop de jogo numa nova Thread

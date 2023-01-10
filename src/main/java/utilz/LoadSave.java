@@ -10,6 +10,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import main.Game;
 
@@ -18,12 +22,13 @@ public class LoadSave {
     
     public static final String PLAYER_ATLAS = "player_sprites.png"; //No lugar do name colocar o arquivo imagem JOGADOR (Ex: player_sprites.png)
     public static final String LEVEL_ATLAS = "outside_sprites.png"; //No lugar do name colocar o arquivo imagem CENARIO(Ex: outside_sprites.png)
-    public static final String LEVEL_ONE_DATA = "level_one.png"; //No lugar do name colocar o arquivo imagem NIVEL(Ex: level_one.png)
     public static final String MENU_BUTTONS = "button_atlas.png";
     public static final String MENU_BACKGROUND = "menu_background.png";
     public static final String PAUSE_BACKGROUND = "pause_menu.png";
     public static final String SOUND_BUTTONS = "sound_button.png";
     public static final String URM_BUTTONS = "urm_buttons.png";
+    public static final String PLAYING_BG_IMG = "level_one.png"; // ADICIONAR ARQUIVO DO BCKGROUND AQUI
+    public static final String COMPLETED_IMG = "completed_sprite.png";// ADICIONAR ARQUIVO DE COMPLETED
     
     //public static final String PLAYING_BG_IMG = "level_one.png"; //No lugar do name colocar o arquivo imagem FUNDO(Ex: level_one.png)
     //Na classe playing crie: BufferedImage backgroundImg;
@@ -44,22 +49,42 @@ public class LoadSave {
         } 
         return img;
     }
-   
-    //GetLevelData reconhece a cor apropriada para os obstaculos do nivel
-    public static int [][] GetLevelData(){
-        int [][] lvlData = new int[Game.TILES_IN_HEIGHT][Game.TILES_IN_WIDTH];
-        BufferedImage img = GetSpriteAtlas(LEVEL_ONE_DATA);
+    
+    public static BufferedImage[] GetAllLevels(){
         
-        for(int j = 0; j < img.getHeight(); j++)
-            for(int i = 0; i < img.getWidth(); i++) {
-                Color color = new Color (img.getRGB(i, j));
-                int value = color.getRed();
-                
-                if(value >= 48)
-                    value = 0;
-                lvlData[j][i] = value;
+        //importando o pacote lvls com suas devidas excecoes evitando erro
+        URL url = LoadSave.class.getResource("/lvls");
+        File file = null;
+        
+       try{
+           file = new File(url.toURI());
+       } catch (URISyntaxException e){
+           e.printStackTrace();
+       }
+       
+       File[] files = file.listFiles();
+       File[] filesSorted = new File[files.length];
+       
+       //Sorteia qual nivel sera executado no jogo de forma que os niveis ficam ordenados de 1 a n
+        for (int i = 0; i < filesSorted.length; i++)
+            for(int j=0; j< files.length; j++){
+                if(files[j].getName().equals((i +1) + ".png"))
+                    filesSorted[i] = files[j];
             }
-        
-        return lvlData;
+
+       
+       BufferedImage[] imgs = new BufferedImage[filesSorted.length];
+       
+       for(int i = 0; i < imgs.length; i++)
+            try {
+                imgs[i] = ImageIO.read(filesSorted[i]);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+           
+           
+       return imgs;
     }
+   
+    
 }

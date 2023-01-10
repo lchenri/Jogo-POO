@@ -1,7 +1,10 @@
 package utilz;
 
+import java.awt.Color;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import main.Game;
+import static utilz.LoadSave.GetSpriteAtlas;
 
 public class HelpMethods {
     
@@ -64,5 +67,21 @@ public class HelpMethods {
             if(!isSolid(hitbox.x + hitbox.width, hitbox.y + hitbox.height + 1, lvlData))
                 return false;
         return true;
+    }
+    
+    public static int [][] GetLevelData(BufferedImage img){
+        int [][] lvlData = new int[Game.TILES_IN_HEIGHT][Game.TILES_IN_WIDTH];
+        
+        for(int j = 0; j < img.getHeight(); j++)
+            for(int i = 0; i < img.getWidth(); i++) {
+                Color color = new Color (img.getRGB(i, j));
+                int value = color.getRed();
+                
+                if(value >= 48)
+                    value = 0;
+                lvlData[j][i] = value;
+            }
+        
+        return lvlData;
     }
 }
