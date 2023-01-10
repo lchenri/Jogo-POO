@@ -79,7 +79,6 @@ public class HelpMethods {
     public static int [][] GetLevelData(BufferedImage img){
         int [][] lvlData = new int[Game.TILES_IN_HEIGHT][Game.TILES_IN_WIDTH];
         
-        //img.getWidth retornando 50, e getHeight retornando 14, sendo que o tamanho do array de lvlData é [14][26]
         for(int j = 0; j < img.getHeight(); j++)
             for(int i = 0; i < img.getWidth(); i++) {
                 Color color = new Color (img.getRGB(i, j));

@@ -57,6 +57,12 @@ public class LoadSave {
     public static BufferedImage[] GetAllLevels(){
 
         //importando o pacote lvls com suas devidas excecoes evitando erro
+        
+        
+        //TOFIX: existe um problema nessa parte, pois as imagens que são importadas tem width maior que o game width, e como o lvldata está com array
+        //fixado no game width, que é 26, dá conflito. mudar a dimensao do array lvl data ou mudar a dimensao das imagens das fases.
+        
+        
         File file = new File("res/lvls");
        
         File[] files = file.listFiles();
