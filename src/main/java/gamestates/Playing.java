@@ -49,7 +49,7 @@ public class Playing extends State implements Statemethods {
         } else {
             levelManager.update();
             player.update();
-            enemyManager.update();
+            enemyManager.update(levelManager.getCurrentLevel().getLevelData());
         }
     }
 
