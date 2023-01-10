@@ -23,9 +23,9 @@ public class EnemyManager {
         crabbies = LoadSave.getCrabs();
     }
     
-    public void update(int[][] lvlData) {
+    public void update(int[][] lvlData, Player player) {
         for(Crabby crabby : crabbies)
-            crabby.update(lvlData);
+            crabby.update(lvlData, player);
     }
     
     public void draw(Graphics g) {
