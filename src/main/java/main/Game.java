@@ -26,7 +26,7 @@ private Menu menu;
     //Dimensionamentos de todo o jogo
     public final static int TILES_DEFAULT_SIZE = 32; //Tamanho padrao dos blocos
     public final static float SCALE = 1.5f;
-    public final static int TILES_IN_WIDTH = 26; //Largura dos blocos
+    public final static int TILES_IN_WIDTH = 50; //Largura dos blocos era 26 passei pra 50, arrumar dps
     public final static int TILES_IN_HEIGHT = 14; // Altura dos blocos
     public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE); //Tamanho real dos blocos
     public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH; // Largura do Jogo

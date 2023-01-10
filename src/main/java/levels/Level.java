@@ -4,10 +4,12 @@
 
 package levels;
 
+import entities.Crabby;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import main.Game;
 import static utilz.HelpMethods.GetLevelData;
-import static utilz.HelpMethods.GetCrabs;
+import static utilz.HelpMethods.getCrabs;
 
 public class Level {
 
@@ -21,7 +23,7 @@ public class Level {
     public Level(BufferedImage img){
         this.img = img;
         createLevelData();
-        createEnenmies();
+        createEnemies();
         calcLvlOffsets();
     }
     
@@ -37,8 +39,8 @@ public class Level {
         lvlData = GetLevelData(img);
     }
 
-    private void createEnenmies() {
-        crabs = GetCrabs(img);
+    private void createEnemies() {
+        crabs = getCrabs(img);
     }
 
     private void calcLvlOffsets() {
@@ -51,7 +53,7 @@ public class Level {
         return maxLvlOffsetX;
     }
     
-    public ArrayList<Crabby> getCrabs(){
+    public ArrayList<Crabby> getCrabbies(){
         return crabs;
     }
     

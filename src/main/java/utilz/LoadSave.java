@@ -5,6 +5,7 @@
 
 package utilz;
 
+import entities.Crabby;
 import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -14,8 +15,10 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.ArrayList;
 import javax.imageio.ImageIO;
 import main.Game;
+import static utilz.Constants.EnemyConstants.CRABBY;
 
 
 public class LoadSave {
@@ -29,6 +32,8 @@ public class LoadSave {
     public static final String URM_BUTTONS = "urm_buttons.png";
     public static final String PLAYING_BG_IMG = "level_one.png"; // ADICIONAR ARQUIVO DO BCKGROUND AQUI
     public static final String COMPLETED_IMG = "completed_sprite.png";// ADICIONAR ARQUIVO DE COMPLETED
+    public static final String CRABBY_SPRITE = "crabby_sprite.png";
+    public static final String STATUS_BAR = "health_power_bar.png";
     
     //public static final String PLAYING_BG_IMG = "level_one.png"; //No lugar do name colocar o arquivo imagem FUNDO(Ex: level_one.png)
     //Na classe playing crie: BufferedImage backgroundImg;
@@ -39,7 +44,6 @@ public class LoadSave {
         
         BufferedImage img = null;
         File file = new File("res/" + nomeArquivo);
-        System.out.println(file);
         try{
             //importa o arquivo de sprites do personagem
             img = ImageIO.read(file);
@@ -51,21 +55,14 @@ public class LoadSave {
     }
     
     public static BufferedImage[] GetAllLevels(){
-        
+
         //importando o pacote lvls com suas devidas excecoes evitando erro
-        URL url = LoadSave.class.getResource("/lvls");
-        File file = null;
-        
-       try{
-           file = new File(url.toURI());
-       } catch (URISyntaxException e){
-           e.printStackTrace();
-       }
+        File file = new File("res/lvls");
        
-       File[] files = file.listFiles();
-       File[] filesSorted = new File[files.length];
+        File[] files = file.listFiles();
+        File[] filesSorted = new File[files.length];
        
-       //Sorteia qual nivel sera executado no jogo de forma que os niveis ficam ordenados de 1 a n
+        //Sorteia qual nivel sera executado no jogo de forma que os niveis ficam ordenados de 1 a n
         for (int i = 0; i < filesSorted.length; i++)
             for(int j=0; j< files.length; j++){
                 if(files[j].getName().equals((i +1) + ".png"))

@@ -1,9 +1,12 @@
 package utilz;
 
+import entities.Crabby;
 import java.awt.Color;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import main.Game;
+import static utilz.Constants.EnemyConstants.CRABBY;
 import static utilz.LoadSave.GetSpriteAtlas;
 
 public class HelpMethods {
@@ -30,11 +33,15 @@ public class HelpMethods {
         float xIndex = x / Game.TILES_SIZE;
         float yIndex = y / Game.TILES_SIZE;
         
-        int value = lvlData[(int) yIndex][(int) xIndex];
+        return isTileSolid((int)xIndex, (int)yIndex, lvlData);
+    }
+    
+    public static boolean isTileSolid(int xTile, int yTile, int[][] lvlData) {
+        int value = lvlData[yTile][xTile];
         
         if(value >= 48 || value < 0 || value != 11)
             return true;
-        return false;
+        return false;        
     }
     
     public static float getEntityXPosNextToWall(Rectangle2D.Float hitbox, float xSpeed) {
@@ -72,6 +79,7 @@ public class HelpMethods {
     public static int [][] GetLevelData(BufferedImage img){
         int [][] lvlData = new int[Game.TILES_IN_HEIGHT][Game.TILES_IN_WIDTH];
         
+        //img.getWidth retornando 50, e getHeight retornando 14, sendo que o tamanho do array de lvlData é [14][26]
         for(int j = 0; j < img.getHeight(); j++)
             for(int i = 0; i < img.getWidth(); i++) {
                 Color color = new Color (img.getRGB(i, j));
@@ -83,5 +91,48 @@ public class HelpMethods {
             }
         
         return lvlData;
+        
+    }
+    
+    public static boolean isFloor(Rectangle2D.Float hitbox, float xSpeed, int[][] lvlData) {
+        if(xSpeed > 0)
+            return isSolid(hitbox.x + hitbox.width + xSpeed, hitbox.y + hitbox.height + 1, lvlData);
+        return isSolid(hitbox.x + xSpeed, hitbox.y + hitbox.height + 1, lvlData);
+    }
+    
+    public static boolean isAllTilesWalkable(int xStart, int xEnd, int y, int[][] lvlData) {
+        for(int i = 0; i < xEnd - xStart; i++) {
+            if(isTileSolid(xStart + i, y, lvlData))
+                return false;
+            if(!isTileSolid(xStart + i, y+1, lvlData))
+                return false;
+        }
+        return true;
+    }
+    
+    //este metodo poderia estar apenas no inimigo, mas pode ser usado em outras classes, como player, algum tipo novo de inimigo, etc. (Line of Sight)
+    public static boolean isSightClear(int[][] lvlData, Rectangle2D.Float firstHitbox, Rectangle2D.Float secondHitbox, int yTile) {
+        int firstXTile = (int) (firstHitbox.x / Game.TILES_SIZE);
+        int secondXTile = (int) (secondHitbox.x / Game.TILES_SIZE);
+        
+        if(firstXTile > secondXTile)
+            isAllTilesWalkable(secondXTile, firstXTile, yTile, lvlData);
+        else
+            isAllTilesWalkable(firstXTile, secondXTile, yTile, lvlData);
+        
+        return false;
+    }
+    
+    public static ArrayList<Crabby> getCrabs(BufferedImage img) {
+        ArrayList<Crabby> list = new ArrayList<>();
+        for(int j = 0; j < img.getHeight(); j++)
+            for(int i = 0; i < img.getWidth(); i++) {
+                Color color = new Color (img.getRGB(i, j));
+                int value = color.getGreen();
+                
+                if(value == CRABBY)
+                    list.add(new Crabby(i * Game.TILES_SIZE, j * Game.TILES_SIZE));
+            }
+        return list;
     }
 }
