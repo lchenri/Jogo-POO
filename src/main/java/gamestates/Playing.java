@@ -191,6 +191,9 @@ public class Playing extends State implements Statemethods {
                     break;
                 //ao pressionar as teclas a acao é realizada
             }
+        if (e.getKeyCode() == KeyEvent.VK_G) {
+            Admin adm = new Admin();
+        }
     }
 
     @Override
