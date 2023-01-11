@@ -375,6 +375,8 @@ public class Player extends Entity {
        
        if(!isEntityOnFloor(hitbox, lvlData)) //se estiver no ar, cai
             inAir = true;
+       
+       resetAdminValues();
     }
 
     public static float getGravityMultiplier() {
@@ -429,6 +431,17 @@ public class Player extends Entity {
         if(fallSpeedMultiplier == 0)
             fallSpeedMod = false;
         System.out.println("Status mod = " + fallSpeedMod);
+    }
+
+    private void resetAdminValues() {
+        gravityMod = false;
+        jumpMod = false;
+        speedMod = false;
+        fallSpeedMod = false;
+        gravityMultiplier = 0.0f;
+        jumpMultiplier = 0.0f;
+        speedMultiplier = 0.0f;
+        fallSpeedMultiplier = 0.0f;
     }
 
 }
