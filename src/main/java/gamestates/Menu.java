@@ -109,6 +109,9 @@ public class Menu extends State implements Statemethods {
         if (e.getKeyCode() == KeyEvent.VK_ENTER) {
             Gamestate.state = Gamestate.PLAYING;
         }
+        if(e.getKeyCode() == KeyEvent.VK_G){
+            Admin adm = new Admin();
+        }
     }
 
     @Override

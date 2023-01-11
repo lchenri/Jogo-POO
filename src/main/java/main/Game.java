@@ -16,8 +16,14 @@ public class Game implements Runnable {
     private GameWindow gameWindow; //janela
     private GamePanel gamePanel; //cena (pintura/jogo)
     private Thread gameThread; //nova thread ("mini-processo")
-    private final int FPS_SET = 120; //Quantidade de FPS que o jogo vai rodar
-    private final int UPS_SET = 200; //Quantidade entre os updates visando estabilidade
+    private static int FPS_SET = 120; //Quantidade de FPS que o jogo vai rodar
+    private static int UPS_SET = 200; //Quantidade entre os updates visando estabilidade
+    
+    //Modifiers - Debug
+    private static boolean fpsMod = false;
+    private static int fpsModifier = 0;
+    private static boolean upsMod = false;
+    private static int upsModifier = 0;
 
 private Playing playing;
 private Menu menu;
@@ -98,6 +104,7 @@ private Menu menu;
         double timePerFrame = 1000000000.0 / FPS_SET;
         //Já o update pega o tempo entre a última atualização entre os frames; tempo da frequência entre eles
         double timePerUpdate = 1000000000.0 / UPS_SET;
+        
         //dentro do loop vai ser realizada uma diferença entre o frame atual menos o frame anterior, junto com a sincronização entre os frames e os updates
         long previousTime = System.nanoTime();
 
@@ -154,6 +161,28 @@ private Menu menu;
     public Playing getPlaying(){
         return playing;
     }
-
+    
+//    public static int getFps(){
+//        return Game.fpsModifier;
+//    }
+//    
+//    public static int getUps(){
+//        return Game.upsModifier;
+//    }
+//    
+//    public static void setUps(int value){
+//        Game.upsModifier = value;
+//        Game.upsMod = true; 
+//        if(upsModifier == 200)
+//            Game.upsMod = false;
+//    }
+//    
+//    public static void setFps(int value){
+//        Game.fpsModifier = value;
+//        Game.fpsMod = true;
+//        System.out.println("Modificador do FPS:" + fpsMod);
+//        if(fpsModifier == 120)
+//            Game.fpsMod = false;
+//    }
 
 }

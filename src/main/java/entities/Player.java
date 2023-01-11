@@ -1,7 +1,6 @@
 //Leonorico Eduardo de Paula Borges (202135032)
 //Lucas Henrique de Araujo Cardoso (202135038)
 //Pedro Lucas Botelho Freitas (202135040)
-
 package entities;
 
 import java.awt.Graphics;
@@ -16,7 +15,7 @@ import static utilz.HelpMethods.*;
 import utilz.LoadSave;
 
 public class Player extends Entity {
-    
+
     private BufferedImage[][] animations;
     private int aniTick, aniIndex, aniSpeed = 25;
     private int playerAction = IDLE;
@@ -24,41 +23,54 @@ public class Player extends Entity {
     private boolean moving = false, attacking = false;
     private boolean left, up, right, down, jump;
     private float playerSpeed = 1.0f * Game.SCALE;
+    //playerSpeed = 1.0f
     private int[][] lvlData;
     private float xDrawOffset = 21 * Game.SCALE;
     private float yDrawOffset = 4 * Game.SCALE;
-    
+
+    //modifiers - DEBUG
+    private static boolean gravityMod = false;
+    private static float gravityMultiplier = 0.0f;
+    private static boolean jumpMod = false;
+    private static float jumpMultiplier = 0.0f;
+    private static boolean speedMod = false;
+    private static float speedMultiplier = 0.0f;
+    private static boolean fallSpeedMod = false;
+    private static float fallSpeedMultiplier = 0.0f;
+
     //Jumping / Falling
     private float airSpeed = 0f;
     private float gravity = 0.04f * Game.SCALE;
     private float jumpSpeed = -2.25f * Game.SCALE;
+    // JumpSpeed = -2.25f
     private float fallSpeedAfterCollision = 0.5f * Game.SCALE;
-    
+    //fallSpeedAfterCollision = 0.5f;
+
     private boolean inAir = false;
-    
+
     public Player(float x, float y, int width, int height) {
         super(x, y, width, height);
         loadAnimations();
         initHitbox(x, y, (int) (20 * Game.SCALE), (int) (26 * Game.SCALE)); //inicializa hitbox
     }
-    
+
     public void update() {
         updatePos(); //move
         updateAnimationTick(); //Contador para possiblitar a execucao da animacao
         setAnimation(); //define a animacao que sera feita conforme a verificacao se esta movendo ou nao
     }
-    
+
     public void render(Graphics g) {
-        g.drawImage(animations[playerAction][aniIndex], (int)(hitbox.x - xDrawOffset), (int)(hitbox.y - yDrawOffset), width, height, null); //desenha personagem conforme seu hitbox
+        g.drawImage(animations[playerAction][aniIndex], (int) (hitbox.x - xDrawOffset), (int) (hitbox.y - yDrawOffset), width, height, null); //desenha personagem conforme seu hitbox
         //drawHitbox(g); //desenha hitbox (teste)
     }
 
     private void updateAnimationTick() {
         aniTick++;
-        if(aniTick >= aniSpeed) {
+        if (aniTick >= aniSpeed) {
             aniTick = 0;
             aniIndex++;
-            if(aniIndex >= getSpriteAmount(playerAction)) {
+            if (aniIndex >= getSpriteAmount(playerAction)) {
                 aniIndex = 0;
                 attacking = false; // sempre reseta o ataque caso o movimento finalize
             }
@@ -67,112 +79,146 @@ public class Player extends Entity {
 
     private void setAnimation() {
         int startAni = playerAction;
-        
-        if(moving)
+
+        if (moving) {
             playerAction = RUNNING;
-        else
+        } else {
             playerAction = IDLE;
-        
-        if(inAir) {
-            if(airSpeed < 0)
-                playerAction = JUMP;
-            else
-                playerAction = FALLING;
         }
-        
-        if(attacking)
+
+        if (inAir) {
+            if (airSpeed < 0) {
+                playerAction = JUMP;
+            } else {
+                playerAction = FALLING;
+            }
+        }
+
+        if (attacking) {
             playerAction = ATTACK_1;
-        
-        if(startAni != playerAction) {
+        }
+
+        if (startAni != playerAction) {
             resetAniTick(); //evita ficar "flicando" a imagem
         }
     }
-    
+
     public void resetAniTick() {
         aniTick = 0;
         aniIndex = 0;
     }
 
     private void updatePos() {
-        
+
         moving = false;
         //movimentacao pulo
-        if(jump)
+        if (jump) {
             jump(); //pula
-        if(!left && !right && !inAir)
+        }
+        if (!left && !right && !inAir) {
             return; //se está no ar não pula
-        
+        }
         float xSpeed = 0;
-        
+
         //movimentacao horizontal
-        if(left)
-            xSpeed -= playerSpeed;
-        
-        if(right) 
-            xSpeed += playerSpeed;
-        
-        if(!inAir)
-            if(!isEntityOnFloor(hitbox, lvlData))
+        if (left) {
+            if (speedMod == true) {
+                xSpeed -= playerSpeed + speedMultiplier;
+            } else {
+                xSpeed -= playerSpeed;
+            }
+        }
+
+        if (right) {
+            if(speedMod == true){
+                xSpeed += playerSpeed + speedMultiplier;
+            }else{
+                xSpeed += playerSpeed;
+            }
+        }
+
+        if (!inAir) {
+            if (!isEntityOnFloor(hitbox, lvlData)) {
                 inAir = true;
-        
+            }
+        }
+
         //movimentacao vertical
-        if(inAir) {
-            if(canMoveHere(hitbox.x, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
+        if (inAir) {
+            if (canMoveHere(hitbox.x, hitbox.y + airSpeed, hitbox.width, hitbox.height, lvlData)) {
                 hitbox.y += airSpeed;
-                airSpeed += gravity;
+                if (gravityMod == true) {
+                    airSpeed += gravity + gravityMultiplier;
+                } else {
+                    airSpeed += gravity;
+                }
                 updateXPos(xSpeed);
             } else {
                 hitbox.y = getEntityYPosUnderRoofOrAboveFloor(hitbox, airSpeed); //analisa se colidiu com teto ou parou no chao
-                if(airSpeed > 0)
+                if (airSpeed > 0) {
                     resetInAir(); //nao esta mais no ar
-                else
-                    airSpeed = fallSpeedAfterCollision; //parou no ar apos colidir
+                } else {
+                    if(fallSpeedMod == true){
+                        airSpeed = fallSpeedAfterCollision + fallSpeedMultiplier;
+                    }else{
+                        airSpeed = fallSpeedAfterCollision; //parou no ar apos colidir
+                    }
+                }
                 updateXPos(xSpeed);
             }
         } else {
             updateXPos(xSpeed);
         }
-        
+
         moving = true;
-        
+
     }
-    
+
     private void jump() {
-        if(inAir)
+        if (inAir) {
             return;
+        }
         inAir = true;
-        airSpeed = jumpSpeed;
+        if (jumpMod == true) {
+            airSpeed = jumpSpeed + jumpMultiplier;
+        } else {
+            airSpeed = jumpSpeed;
+        }
     }
-    
+
     private void resetInAir() {
         inAir = false;
         airSpeed = 0;
     }
 
     private void updateXPos(float xSpeed) {
-        if(canMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
+        if (canMoveHere(hitbox.x + xSpeed, hitbox.y, hitbox.width, hitbox.height, lvlData)) {
             hitbox.x += xSpeed;
         } else {
             hitbox.x = getEntityXPosNextToWall(hitbox, xSpeed); //analisa se colidiu horizontalmente
         }
     }
-    
+
     private void loadAnimations() {
-        
+
         BufferedImage img = LoadSave.GetSpriteAtlas(LoadSave.PLAYER_ATLAS);
         animations = new BufferedImage[9][6];
 
         //Divide em uma matriz todos os diferentes sprites
-        for(int i = 0; i < animations.length; i++)
-            for(int j = 0; j < animations[i].length; j++)
-                animations[i][j] = img.getSubimage(j*64, i*40, 64, 40);
+        for (int i = 0; i < animations.length; i++) {
+            for (int j = 0; j < animations[i].length; j++) {
+                animations[i][j] = img.getSubimage(j * 64, i * 40, 64, 40);
+            }
+        }
 
     }
-    
+
     public void loadLevelData(int[][] lvlData) {
         this.lvlData = lvlData;
-        if(!isEntityOnFloor(hitbox, lvlData)) //se estiver no ar, cai
+        if (!isEntityOnFloor(hitbox, lvlData)) //se estiver no ar, cai
+        {
             inAir = true;
+        }
     }
 
     public boolean getLeft() {
@@ -190,7 +236,7 @@ public class Player extends Entity {
     public void setUp(boolean up) {
         this.up = up;
     }
-    
+
     public boolean getRight() {
         return right;
     }
@@ -213,13 +259,67 @@ public class Player extends Entity {
         up = false;
         down = false;
     }
-    
+
     public void setAttacking(boolean attacking) {
         this.attacking = attacking;
     }
-    
+
     public void setJump(boolean jump) {
         this.jump = jump;
     }
+
+    public static float getGravityMultiplier() {
+        return gravityMultiplier;
+    }
+
+    public static void setGravityMultiplier(float gravityMultiplierR) {
+        gravityMultiplier = gravityMultiplierR;
+        System.out.println("VALOR DO MULTIPLICADOR = " + gravityMultiplierR);
+        gravityMod = true;
+        
+        if(gravityMultiplier == 0)
+            gravityMod = false;
+        
+        System.out.println("Status mod = " + gravityMod);
+    }
+
+    public static float getJumpMultiplier() {
+        return jumpMultiplier;
+    }
+
+    public static void setJump(float jumpMultiplierR) {
+        jumpMultiplier = jumpMultiplierR;
+        System.out.println("Valor do Multiplicador = " + jumpMultiplierR);
+        jumpMod = true;
+        if(jumpMultiplier == 0)
+            jumpMod = false;
+        System.out.println("Status mod = " + jumpMod);
+    }
+
+    public static float getSpeedMultiplier() {
+        return speedMultiplier;
+    }
+
+    public static void setSpeed(float speedMultiplierR) {
+        speedMultiplier = speedMultiplierR;
+        System.out.println("Valor do multiplicador = " + speedMultiplierR);
+        speedMod = true;
+        if(speedMultiplier == 0)
+            speedMod = false;
+        System.out.println("Status mod = " + speedMod);
+    }
     
+    public static float getFallSpeedMultiplier(){
+        return fallSpeedMultiplier;
+    }
+    
+    public static void setFallSpeedMultiplier(float fallSpeedMultiplierR){
+        fallSpeedMultiplier = fallSpeedMultiplierR;
+        System.out.println("Valor do multiplicador = " + fallSpeedMultiplierR);
+        fallSpeedMod = true;
+        if(fallSpeedMultiplier == 0)
+            fallSpeedMod = false;
+        System.out.println("Status mod = " + fallSpeedMod);
+    }
+
 }

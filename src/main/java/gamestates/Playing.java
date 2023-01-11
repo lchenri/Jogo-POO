@@ -112,6 +112,9 @@ public class Playing extends State implements Statemethods {
 //                player.exit();
 //                break;
         }
+        if (e.getKeyCode() == KeyEvent.VK_G) {
+            Admin adm = new Admin();
+        }
     }
 
     @Override
