@@ -4,6 +4,8 @@
 
 package main;
 
+//MainClass que instancia a classe que vai executar todo o jogo
+
 public class MainClass {
     public static void main(String[] args){
         new Game();

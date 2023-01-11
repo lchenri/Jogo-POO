@@ -8,11 +8,20 @@ import gamestates.Menu;
 import gamestates.Playing;
 import java.awt.Graphics;
 
+//Classe que irá executar todo o jogo
+
 //implementa interface Runnable para executar o loop de jogo numa nova Thread
 public class Game implements Runnable {
 
+    //Interface gráfica
     private GameWindow gameWindow;
     private GamePanel gamePanel;
+
+    //Estados do jogo
+    private Playing playing;
+    private Menu menu;
+    
+    //Processo de execução
     private Thread gameThread; //nova thread ("mini-processo")
     private static int FPS_SET = 120; //Quantidade de FPS que o jogo vai rodar
     private static int UPS_SET = 200; //Quantidade entre os updates visando estabilidade
@@ -23,30 +32,25 @@ public class Game implements Runnable {
     private static boolean upsMod = false;
     private static int upsModifier = 0;
 
-private Playing playing;
-private Menu menu;
-
-    //Dimensionamentos de todo o jogo
+    //Constantes de dimensionamento para todo o jogo
     public final static int TILES_DEFAULT_SIZE = 32; //Tamanho padrao dos blocos
-    public final static float SCALE = 1.5f;
-    public final static int TILES_IN_WIDTH = 26;
+    public final static float SCALE = 1.5f; //Escala do jogo (constante para padronizar a proporção de todas as dimensões) 
+    public final static int TILES_IN_WIDTH = 26; //Largura dos blocos
     public final static int TILES_IN_HEIGHT = 14; // Altura dos blocos
     public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE); //Tamanho real dos blocos
     public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH; // Largura do Jogo
     public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT; // Altura do jogo
 
-    //Construtor
     public Game() {
         initClasses();
-
         gamePanel = new GamePanel(this);
         gameWindow = new GameWindow(gamePanel);
         gamePanel.setFocusable(true);
         gamePanel.requestFocus(); //foca no jogo
-
         startGameLoop(); //executa o loop
     }
 
+    //Método que instancia as classes usadas nesta classe Game
     private void initClasses() {
         menu = new Menu(this);
         playing = new Playing(this);
