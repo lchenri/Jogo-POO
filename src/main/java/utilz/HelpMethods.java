@@ -10,7 +10,8 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import main.Game;
-import static utilz.Constants.EnemyConstants.CRABBY;
+import static utilz.Constants.EnemyConstants.ENEMY;
+import static utilz.Constants.GameConstants.*;
 
 public class HelpMethods {
     
@@ -28,13 +29,13 @@ public class HelpMethods {
     //Verifica se no espaço há um objeto
     private static boolean isSolid(float x, float y, int[][] lvlData) {
         
-        if(x < 0 || x >= Game.GAME_WIDTH)
+        if(x < 0 || x >= GAME_WIDTH)
             return true;
-        if(y < 0 || y >= Game.GAME_HEIGHT)
+        if(y < 0 || y >= GAME_HEIGHT)
             return true;
         
-        float xIndex = x / Game.TILES_SIZE;
-        float yIndex = y / Game.TILES_SIZE;
+        float xIndex = x / TILES_SIZE;
+        float yIndex = y / TILES_SIZE;
         
         return isTileSolid((int)xIndex, (int)yIndex, lvlData);
     }
@@ -49,25 +50,25 @@ public class HelpMethods {
     
     public static float getEntityXPosNextToWall(Rectangle2D.Float hitbox, float xSpeed) {
         
-        int currentTile = (int)(hitbox.x / Game.TILES_SIZE);
+        int currentTile = (int)(hitbox.x / TILES_SIZE);
         
         if(xSpeed > 0) {
-            int tileXPos = currentTile * Game.TILES_SIZE;
-            int xOffset = (int)(Game.TILES_SIZE - hitbox.width);
+            int tileXPos = currentTile * TILES_SIZE;
+            int xOffset = (int)(TILES_SIZE - hitbox.width);
             return tileXPos + xOffset -1;
         } else {
-            return currentTile * Game.TILES_SIZE;
+            return currentTile * TILES_SIZE;
         }
     }
     
     public static float getEntityYPosUnderRoofOrAboveFloor(Rectangle2D.Float hitbox,float airSpeed) {
-        int currentTile = (int)(hitbox.y / Game.TILES_SIZE);
+        int currentTile = (int)(hitbox.y / TILES_SIZE);
         if(airSpeed > 0) {
-            int tileYPos = currentTile * Game.TILES_SIZE;
-            int yOffset = (int)(Game.TILES_SIZE - hitbox.height);
+            int tileYPos = currentTile * TILES_SIZE;
+            int yOffset = (int)(TILES_SIZE - hitbox.height);
             return tileYPos + yOffset - 1;
         } else {
-            return currentTile * Game.TILES_SIZE;
+            return currentTile * TILES_SIZE;
         }
             
     }
@@ -80,7 +81,7 @@ public class HelpMethods {
     }
     
     public static int [][] GetLevelData(BufferedImage img){
-        int [][] lvlData = new int[Game.TILES_IN_HEIGHT][Game.TILES_IN_WIDTH];
+        int [][] lvlData = new int[TILES_IN_HEIGHT][TILES_IN_WIDTH];
         
         for(int j = 0; j < img.getHeight(); j++)
             for(int i = 0; i < img.getWidth(); i++) {
@@ -114,8 +115,8 @@ public class HelpMethods {
     
     //este metodo poderia estar apenas no inimigo, mas pode ser usado em outras classes, como player, algum tipo novo de inimigo, etc. (Line of Sight)
     public static boolean isSightClear(int[][] lvlData, Rectangle2D.Float firstHitbox, Rectangle2D.Float secondHitbox, int yTile) {
-        int firstXTile = (int) (firstHitbox.x / Game.TILES_SIZE);
-        int secondXTile = (int) (secondHitbox.x / Game.TILES_SIZE);
+        int firstXTile = (int) (firstHitbox.x / TILES_SIZE);
+        int secondXTile = (int) (secondHitbox.x / TILES_SIZE);
         
         if(firstXTile > secondXTile)
             isAllTilesWalkable(secondXTile, firstXTile, yTile, lvlData);
@@ -132,8 +133,8 @@ public class HelpMethods {
                 Color color = new Color (img.getRGB(i, j));
                 int value = color.getGreen();
                 
-                if(value == CRABBY)
-                    list.add(new Crabby(i * Game.TILES_SIZE, j * Game.TILES_SIZE));
+                if(value == ENEMY)
+                    list.add(new Crabby(i * TILES_SIZE, j * TILES_SIZE));
             }
         return list;
     }

@@ -20,6 +20,7 @@ import java.awt.geom.Rectangle2D;
 import ui.GameOverOverlay;
 import ui.PauseOverlay;
 import utilz.LoadSave;
+import static utilz.Constants.GameConstants.*;
 
 public class Playing extends State implements Statemethods {
 
@@ -66,7 +67,7 @@ public class Playing extends State implements Statemethods {
     private void initClasses() {
         levelManager = new LevelManager(game);
         enemyManager = new EnemyManager(this);
-        player = new Player(200, 200, (int) (64 * Game.SCALE), (int) (40 * Game.SCALE), this);
+        player = new Player(200, 200, (int) (64 * SCALE), (int) (40 * SCALE), this);
         player.loadLevelData(levelManager.getCurrentLevel().getLevelData());
         levelCompletedOverlay = new LevelCompletedOverlay(this);
     }
@@ -89,7 +90,7 @@ public class Playing extends State implements Statemethods {
 
     @Override
     public void draw(Graphics g) {
-        g.drawImage(backgroundImg, 0, 0,Game.GAME_WIDTH ,Game.GAME_HEIGHT, null);
+        g.drawImage(backgroundImg, 0, 0,GAME_WIDTH ,GAME_HEIGHT, null);
         levelManager.draw(g);
         player.render(g);
         enemyManager.draw(g);

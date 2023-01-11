@@ -1,6 +1,7 @@
 //Leonorico Eduardo de Paula Borges (202135032)
 //Lucas Henrique de Araujo Cardoso (202135038)
 //Pedro Lucas Botelho Freitas (202135040)
+
 package main;
 
 import gamestates.Gamestate;
@@ -32,35 +33,28 @@ public class Game implements Runnable {
     private static boolean upsMod = false;
     private static int upsModifier = 0;
 
-    //Constantes de dimensionamento para todo o jogo
-    public final static int TILES_DEFAULT_SIZE = 32; //Tamanho padrao dos blocos
-    public final static float SCALE = 1.5f; //Escala do jogo (constante para padronizar a proporção de todas as dimensões) 
-    public final static int TILES_IN_WIDTH = 26; //Largura dos blocos
-    public final static int TILES_IN_HEIGHT = 14; // Altura dos blocos
-    public final static int TILES_SIZE = (int) (TILES_DEFAULT_SIZE * SCALE); //Tamanho real dos blocos
-    public final static int GAME_WIDTH = TILES_SIZE * TILES_IN_WIDTH; // Largura do Jogo
-    public final static int GAME_HEIGHT = TILES_SIZE * TILES_IN_HEIGHT; // Altura do jogo
-
     public Game() {
         initClasses();
-        gamePanel = new GamePanel(this);
-        gameWindow = new GameWindow(gamePanel);
         gamePanel.setFocusable(true);
         gamePanel.requestFocus(); //foca no jogo
         startGameLoop(); //executa o loop
     }
 
-    //Método que instancia as classes usadas nesta classe Game
+    //Método que instancia as classes fundamentais do jogo.
     private void initClasses() {
         menu = new Menu(this);
         playing = new Playing(this);
+        gamePanel = new GamePanel(this);
+        gameWindow = new GameWindow(gamePanel);
     }
 
+    //Executa o loop e inicia o processo em uma nova thread
     private void startGameLoop() {
         gameThread = new Thread(this);
         gameThread.start();
     }
 
+    //Atualiza o jogo
     public void update() {
 
         //to-do:  inserçao do modo de administrador
@@ -80,6 +74,7 @@ public class Game implements Runnable {
         }
     }
 
+    //Renderiza/Desenha o jogo
     public void render(Graphics g) {
 
         switch (Gamestate.state) {
@@ -149,6 +144,7 @@ public class Game implements Runnable {
         }
     }
 
+    //Se o jogo estiver no estado PLAYING, o movimento do jogador vai parar quando o jogo não estiver em foco no computador
     public void windowFocusLost() {
         if(Gamestate.state == Gamestate.PLAYING){
             playing.getPlayer().resetDirBooleans();

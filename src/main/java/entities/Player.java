@@ -9,10 +9,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import main.Game;
 import static utilz.Constants.PlayerConstants.*;
 import static utilz.Constants.PlayerConstants.getSpriteAmount;
 import static utilz.HelpMethods.*;
+import static utilz.Constants.GameConstants.*;
 import utilz.LoadSave;
 
 public class Player extends Entity {
@@ -23,11 +23,11 @@ public class Player extends Entity {
     private int playerDir = -1;
     private boolean moving = false, attacking = false;
     private boolean left, up, right, down, jump;
-    private float playerSpeed = 1.0f * Game.SCALE;
+    private float playerSpeed = 1.0f * SCALE;
     //playerSpeed = 1.0f
     private int[][] lvlData;
-    private float xDrawOffset = 21 * Game.SCALE;
-    private float yDrawOffset = 4 * Game.SCALE;
+    private float xDrawOffset = 21 * SCALE;
+    private float yDrawOffset = 4 * SCALE;
 
     //modifiers - DEBUG
     private static boolean gravityMod = false;
@@ -41,23 +41,23 @@ public class Player extends Entity {
 
     //Jumping / Falling
     private float airSpeed = 0f;
-    private float gravity = 0.04f * Game.SCALE;
-    private float jumpSpeed = -2.25f * Game.SCALE;
-    private float fallSpeedAfterCollision = 0.5f * Game.SCALE;
+    private float gravity = 0.04f * SCALE;
+    private float jumpSpeed = -2.25f * SCALE;
+    private float fallSpeedAfterCollision = 0.5f * SCALE;
     private boolean inAir = false;
     
     //StatusBarUI
     private BufferedImage statusBarImg;
     
-    private int statusBarWidth = (int) (192 * Game.SCALE);
-    private int statusBarHeight = (int) (58 * Game.SCALE);
-    private int statusBarX = (int) (10 * Game.SCALE);
-    private int statusBarY = (int) (10 * Game.SCALE);
+    private int statusBarWidth = (int) (192 * SCALE);
+    private int statusBarHeight = (int) (58 * SCALE);
+    private int statusBarX = (int) (10 * SCALE);
+    private int statusBarY = (int) (10 * SCALE);
     
-    private int healthBarWidth = (int) (150 * Game.SCALE);
-    private int healthBarHeight = (int) (4 * Game.SCALE);
-    private int healthBarXStart = (int) (34 * Game.SCALE);
-    private int healthBarYStart = (int) (14 * Game.SCALE);
+    private int healthBarWidth = (int) (150 * SCALE);
+    private int healthBarHeight = (int) (4 * SCALE);
+    private int healthBarXStart = (int) (34 * SCALE);
+    private int healthBarYStart = (int) (14 * SCALE);
     
     private int maxHealth = 100;
     private int currentHealth = maxHealth;
@@ -76,12 +76,12 @@ public class Player extends Entity {
         super(x, y, width, height);
         this.playing = playing;
         loadAnimations();
-        initHitbox(x, y, (int) (20 * Game.SCALE), (int) (26 * Game.SCALE)); //inicializa hitbox
+        initHitbox(x, y, (int) (20 * SCALE), (int) (26 * SCALE)); //inicializa hitbox
         initAttackBox();
     }
     
     private void initAttackBox() {
-        attackBox = new Rectangle2D.Float(x, y, (int)(20 * Game.SCALE), (int)(20 * Game.SCALE));
+        attackBox = new Rectangle2D.Float(x, y, (int)(20 * SCALE), (int)(20 * SCALE));
     }
 
     public void update() {
@@ -108,11 +108,11 @@ public class Player extends Entity {
     
     private void updateAttackBox() {
         if(right) {
-            attackBox.x = hitbox.x + hitbox.width + (int)(Game.SCALE * 10);
+            attackBox.x = hitbox.x + hitbox.width + (int)(SCALE * 10);
         } else if(left) {
-            attackBox.x = hitbox.x - hitbox.width - (int)(Game.SCALE * 10);
+            attackBox.x = hitbox.x - hitbox.width - (int)(SCALE * 10);
         }
-        attackBox.y = hitbox.y + (Game.SCALE * 10);
+        attackBox.y = hitbox.y + (SCALE * 10);
     }
     
     private void updateHealthBar() {

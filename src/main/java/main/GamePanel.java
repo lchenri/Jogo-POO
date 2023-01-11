@@ -9,8 +9,9 @@ import inputs.MouseInputs;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
-import static main.Game.GAME_HEIGHT;
-import static main.Game.GAME_WIDTH;
+import static utilz.Constants.GameConstants.*;
+
+//Classe que renderiza/desenha o jogo
 
 public class GamePanel extends JPanel {
 
@@ -18,19 +19,22 @@ public class GamePanel extends JPanel {
     private Game game;
 
     public GamePanel(Game game) {
-        mouseInputs = new MouseInputs(this);
+        mouseInputs = new MouseInputs(this); //Objeto que captura os inputs do mouse
         this.game = game;
-        setPanelSize();
+        setWindowSize();
+        //Escutadores (teclado)
         addKeyListener(new KeyboardInputs(this));
         addMouseListener(mouseInputs);
         addMouseMotionListener(mouseInputs);
     }  
 
-    private void setPanelSize() {
+    //Define o tamanho da tela
+    private void setWindowSize() {
         Dimension size = new Dimension (GAME_WIDTH,GAME_HEIGHT);
         setPreferredSize(size);
     }
     
+    //Desenha
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);

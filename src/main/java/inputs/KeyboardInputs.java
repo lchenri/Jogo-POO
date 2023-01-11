@@ -9,6 +9,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import main.GamePanel;
 
+//Classe que manipula com as entradas do teclado
+//Os listeners funcionam através do modo de jogo (o que executa são os métodos dos modos de jogo)
+
 public class KeyboardInputs implements KeyListener {
 
     private GamePanel gamePanel;
@@ -19,7 +22,6 @@ public class KeyboardInputs implements KeyListener {
 
     @Override
     public void keyPressed(KeyEvent e) {
-        // os listeners agora, funcionam atraves do modo de jogo
         switch (Gamestate.state) {
             case MENU:
                 gamePanel.getGame().getMenu().keyPressed(e);
@@ -35,7 +37,6 @@ public class KeyboardInputs implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        // os listeners agora, funcionam atraves do modo de jogo
         switch (Gamestate.state) {
             case MENU:
                 gamePanel.getGame().getMenu().keyReleased(e);
@@ -51,6 +52,6 @@ public class KeyboardInputs implements KeyListener {
 
     @Override
     public void keyTyped(KeyEvent e) {
-
+        
     }
 }

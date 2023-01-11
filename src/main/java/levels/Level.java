@@ -7,9 +7,9 @@ package levels;
 import entities.Crabby;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import main.Game;
 import static utilz.HelpMethods.GetLevelData;
 import static utilz.HelpMethods.getCrabs;
+import static utilz.Constants.GameConstants.*;
 
 public class Level {
 
@@ -45,8 +45,8 @@ public class Level {
 
     private void calcLvlOffsets() {
         lvlTilesWide = img.getWidth();
-        maxTilesOffset = lvlTilesWide - Game.TILES_IN_WIDTH;
-        maxLvlOffsetX = Game.TILES_SIZE * maxTilesOffset;
+        maxTilesOffset = lvlTilesWide - TILES_IN_WIDTH;
+        maxLvlOffsetX = TILES_SIZE * maxTilesOffset;
     }
     
     public int getLvlOffset(){

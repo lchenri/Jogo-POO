@@ -12,6 +12,7 @@ import java.awt.image.BufferedImage;
 import main.Game;
 import static utilz.Constants.UI.URMButtons.*;
 import utilz.LoadSave;
+import static utilz.Constants.GameConstants.*;
 
 public class LevelCompletedOverlay {
     
@@ -29,9 +30,9 @@ public class LevelCompletedOverlay {
 
     //metodo responsavel por identificar qual a imagem de pressao dos botoes
     private void initButtons() {
-        int menuX = (int) (330 * Game.SCALE);
-        int nextX = (int) (445 * Game.SCALE);
-        int y = (int) (195* Game.SCALE);
+        int menuX = (int) (330 * SCALE);
+        int nextX = (int) (445 * SCALE);
+        int y = (int) (195* SCALE);
         next = new UrmButton(nextX, y, URM_SIZE, URM_SIZE, 0);
         menu = new UrmButton(menuX, y,URM_SIZE, URM_SIZE, 2);
     }
@@ -39,10 +40,10 @@ public class LevelCompletedOverlay {
     //metodo responsavel por inicializar um nivel com suas proporcoes
     private void initImg() {
        img = LoadSave.GetSpriteAtlas(LoadSave.COMPLETED_IMG);
-       bgW = (int) (img.getWidth() * Game.SCALE);
-       bgH = (int) (img.getHeight()* Game.SCALE);
-       bgX = Game.GAME_WIDTH / 2 - bgW / 2;
-       bgY = (int) (75 * Game.SCALE);
+       bgW = (int) (img.getWidth() * SCALE);
+       bgH = (int) (img.getHeight()* SCALE);
+       bgX = GAME_WIDTH / 2 - bgW / 2;
+       bgY = (int) (75 * SCALE);
     }
 
     public void draw(Graphics g){

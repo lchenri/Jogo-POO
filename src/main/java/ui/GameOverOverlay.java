@@ -10,6 +10,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import main.Game;
+import static utilz.Constants.GameConstants.*;
 
 public class GameOverOverlay {
     
@@ -21,11 +22,11 @@ public class GameOverOverlay {
     
     public void draw(Graphics g) {
         g.setColor(new Color(0,0,0,200));
-        g.fillRect(0, 0, Game.GAME_WIDTH, Game.GAME_HEIGHT);
+        g.fillRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
         
         g.setColor(Color.white);
-        g.drawString("Game Over", Game.GAME_WIDTH / 2, 150);
-        g.drawString("Press esc to enter Main Menu!", Game.GAME_WIDTH / 2, 300);
+        g.drawString("Game Over", GAME_WIDTH / 2, 150);
+        g.drawString("Press esc to enter Main Menu!", GAME_WIDTH / 2, 300);
     }
     
     public void keyPressed(KeyEvent e) {

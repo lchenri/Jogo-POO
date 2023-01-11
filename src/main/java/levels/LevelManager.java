@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import main.Game;
 import utilz.LoadSave;
+import static utilz.Constants.GameConstants.*;
 
 //Essa classe eh responsavel por criar o cenario do jogo
 public class LevelManager {
@@ -60,10 +61,10 @@ public class LevelManager {
     
     public void draw(Graphics g) {
         //pegando uma parte da imagem inteira(imagem cenario)
-        for(int j = 0; j < Game.TILES_IN_HEIGHT; j++)
-             for(int i = 0; i < Game.TILES_IN_WIDTH; i++){
+        for(int j = 0; j < TILES_IN_HEIGHT; j++)
+             for(int i = 0; i < TILES_IN_WIDTH; i++){
                  int index = levels.get(lvlIndex).getSpriteIndex(i, j);
-                 g.drawImage(levelSprite[index],Game.TILES_SIZE*i,Game.TILES_SIZE*j,Game.TILES_SIZE,Game.TILES_SIZE,null);
+                 g.drawImage(levelSprite[index],TILES_SIZE*i,TILES_SIZE*j,TILES_SIZE,TILES_SIZE,null);
              }
     }
 

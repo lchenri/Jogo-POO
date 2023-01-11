@@ -11,6 +11,9 @@ import java.awt.event.MouseMotionListener;
 
 import main.GamePanel;
 
+//Classe que manipula as entradas de mouse
+//Os listeners funcionam através do modo de jogo (o que executa são os métodos dos modos de jogo)
+
 public class MouseInputs implements MouseListener, MouseMotionListener {
 
     private GamePanel gamePanel;

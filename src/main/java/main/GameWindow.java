@@ -8,6 +8,8 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowFocusListener;
 import javax.swing.JFrame;
 
+//Classe que cria a janela para renderizar o jogo
+
 public class GameWindow {
 
     private JFrame jframe;
@@ -23,7 +25,7 @@ public class GameWindow {
         jframe.addWindowFocusListener(new WindowFocusListener() {
             @Override
             public void windowLostFocus(WindowEvent e) {
-                gamePanel.getGame().windowFocusLost(); //caso a janela perca o foco, o personagem para
+                gamePanel.getGame().windowFocusLost(); //caso a janela perca o foco, chama o metodo da classe Game
             }
 
             @Override

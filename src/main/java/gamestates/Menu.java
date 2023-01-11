@@ -14,6 +14,7 @@ import java.awt.image.BufferedImage;
 import main.Game;
 import ui.MenuButton;
 import utilz.LoadSave;
+import static utilz.Constants.GameConstants.*;
 
 public class Menu extends State implements Statemethods {
 
@@ -29,16 +30,16 @@ public class Menu extends State implements Statemethods {
 
     private void loadBackground() {
         backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.MENU_BACKGROUND);
-        menuWidth = (int) (backgroundImg.getWidth() * Game.SCALE);
-        menuHeight = (int) (backgroundImg.getHeight() * Game.SCALE);
-        menuX = Game.GAME_WIDTH / 2 - menuWidth / 2; //no centro e sem desproporcao
-        menuY = (int) (45 * Game.SCALE);
+        menuWidth = (int) (backgroundImg.getWidth() * SCALE);
+        menuHeight = (int) (backgroundImg.getHeight() * SCALE);
+        menuX = GAME_WIDTH / 2 - menuWidth / 2; //no centro e sem desproporcao
+        menuY = (int) (45 * SCALE);
     }
 
     private void loadButtons() {
-        buttons[0] = new MenuButton(Game.GAME_WIDTH / 2, (int) (150 * Game.SCALE), 0, Gamestate.PLAYING);
-        buttons[1] = new MenuButton(Game.GAME_WIDTH / 2, (int) (220 * Game.SCALE), 1, Gamestate.OPTIONS);
-        buttons[2] = new MenuButton(Game.GAME_WIDTH / 2, (int) (290 * Game.SCALE), 2, Gamestate.QUIT);
+        buttons[0] = new MenuButton(GAME_WIDTH / 2, (int) (150 * SCALE), 0, Gamestate.PLAYING);
+        buttons[1] = new MenuButton(GAME_WIDTH / 2, (int) (220 * SCALE), 1, Gamestate.OPTIONS);
+        buttons[2] = new MenuButton(GAME_WIDTH / 2, (int) (290 * SCALE), 2, Gamestate.QUIT);
     }
 
     @Override
