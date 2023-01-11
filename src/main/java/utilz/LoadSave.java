@@ -18,7 +18,7 @@ public class LoadSave {
     public static final String PAUSE_BACKGROUND = "pause_menu.png";
     public static final String SOUND_BUTTONS = "sound_button.png";
     public static final String URM_BUTTONS = "urm_buttons.png";
-    public static final String PLAYING_BG_IMG = "level_one.png"; // ADICIONAR ARQUIVO DO BCKGROUND AQUI
+    public static final String PLAYING_BG_IMG = "playing_bg_img.png"; // ADICIONAR ARQUIVO DO BCKGROUND AQUI
     public static final String COMPLETED_IMG = "completed_sprite.png";// ADICIONAR ARQUIVO DE COMPLETED
     public static final String CRABBY_SPRITE = "crabby_sprite.png";
     public static final String STATUS_BAR = "health_power_bar.png";

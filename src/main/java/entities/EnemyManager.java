@@ -29,7 +29,7 @@ public class EnemyManager {
     }
     
     public void update(int[][] lvlData, Player player) {
-        boolean isAnyActive = true; //aqui é falso por default, mudei pra true para dar certo a execuçao do codigo
+        boolean isAnyActive = false; //aqui é falso por default, mudei pra true para dar certo a execuçao do codigo
         for(Crabby crabby : crabbies)
             if(crabby.isActive()) {
                 crabby.update(lvlData, player);
