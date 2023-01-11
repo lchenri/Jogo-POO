@@ -118,12 +118,11 @@ public class HelpMethods {
         int firstXTile = (int) (firstHitbox.x / TILES_SIZE);
         int secondXTile = (int) (secondHitbox.x / TILES_SIZE);
         
-        if(firstXTile > secondXTile)
-            isAllTilesWalkable(secondXTile, firstXTile, yTile, lvlData);
-        else
-            isAllTilesWalkable(firstXTile, secondXTile, yTile, lvlData);
-        
-        return false;
+        if(firstXTile > secondXTile) {
+            return isAllTilesWalkable(secondXTile, firstXTile, yTile, lvlData);
+        } else {
+            return isAllTilesWalkable(firstXTile, secondXTile, yTile, lvlData);
+        }
     }
     
     public static ArrayList<Crabby> getCrabs(BufferedImage img) {

@@ -29,7 +29,7 @@ public class EnemyManager {
     }
     
     public void update(int[][] lvlData, Player player) {
-        boolean isAnyActive = false; //aqui é falso por default, mudei pra true para dar certo a execuçao do codigo
+        boolean isAnyActive = false;
         for(Crabby crabby : crabbies)
             if(crabby.isActive()) {
                 crabby.update(lvlData, player);
@@ -46,7 +46,9 @@ public class EnemyManager {
     private void drawCrabs(Graphics g) {
         for(Crabby crabby : crabbies) 
             if(crabby.isActive()) {
-                g.drawImage(crabbyArr[crabby.getEnemyState()][crabby.getAniIndex()], (int)crabby.getHitbox().x + crabby.flipX(), (int)crabby.getHitbox().y, CRABBY_WIDTH * crabby.flipW(), CRABBY_HEIGHT, null);
+                g.drawImage(crabbyArr[crabby.getEnemyState()][crabby.getAniIndex()], (int)crabby.getHitbox().x - CRABBY_DRAWOFFSET_X + crabby.flipX(), (int)crabby.getHitbox().y - CRABBY_DRAWOFFSET_Y, CRABBY_WIDTH * crabby.flipW(), CRABBY_HEIGHT, null);
+//                crabby.drawAttackBox(g);
+//                crabby.drawHitbox(g);
             }
     }
     

@@ -121,7 +121,7 @@ public class Player extends Entity {
     
     public void render(Graphics g) {
         g.drawImage(animations[playerAction][aniIndex], (int)(hitbox.x - xDrawOffset) + flipX, (int)(hitbox.y - yDrawOffset), width * flipW, height, null); //desenha personagem conforme seu hitbox
-        //drawHitbox(g); //desenha hitbox (teste)
+//        drawHitbox(g); //desenha hitbox (teste)
 //        drawAttackBox(g);
         drawUI(g);
     }
@@ -134,7 +134,7 @@ public class Player extends Entity {
     private void drawUI(Graphics g) {
         g.drawImage(statusBarImg, statusBarX, statusBarY, statusBarWidth, statusBarHeight, null);
         g.setColor(Color.red);
-        g.fillRect(healthBarXStart + statusBarX, healthBarYStart + statusBarY, healthBarWidth, healthBarHeight);
+        g.fillRect(healthBarXStart + statusBarX, healthBarYStart + statusBarY, healthWidth, healthBarHeight);
     }
 
     private void updateAnimationTick() {

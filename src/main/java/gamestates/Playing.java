@@ -40,9 +40,7 @@ public class Playing extends State implements Statemethods {
     public Playing(Game game) {
         super(game);
         initClasses();
-        pauseOverlay = new PauseOverlay(this);
         backgroundImg = LoadSave.GetSpriteAtlas(LoadSave.PLAYING_BG_IMG);
-        
         calcLvlOffset();
         loadStartLevel();
     }
@@ -69,7 +67,9 @@ public class Playing extends State implements Statemethods {
         enemyManager = new EnemyManager(this);
         player = new Player(200, 200, (int) (64 * SCALE), (int) (40 * SCALE), this);
         player.loadLevelData(levelManager.getCurrentLevel().getLevelData());
+        gameOverOverlay = new GameOverOverlay(this);
         levelCompletedOverlay = new LevelCompletedOverlay(this);
+        pauseOverlay = new PauseOverlay(this);
     }
 
     @Override
