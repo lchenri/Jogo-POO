@@ -7,10 +7,6 @@ Neste enum contém os conjuntos de constantes que vão representar o que está a
  */
 package gamestates;
 
-/**
- *
- * @author lucas
- */
 public enum Gamestate {
     
     PLAYING, MENU, OPTIONS, QUIT;

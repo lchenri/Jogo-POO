@@ -21,10 +21,6 @@ import ui.GameOverOverlay;
 import ui.PauseOverlay;
 import utilz.LoadSave;
 
-/**
- *
- * @author lucas
- */
 public class Playing extends State implements Statemethods {
 
     private Player player; //objeto personagem

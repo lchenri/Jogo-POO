@@ -11,10 +11,6 @@ import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
-/**
- *
- * @author lucas
- */
 public interface Statemethods {
 
     public void update();

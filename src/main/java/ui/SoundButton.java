@@ -9,10 +9,6 @@ import java.awt.image.BufferedImage;
 import utilz.LoadSave;
 import static utilz.Constants.UI.PauseButtons.*;
 
-/**
- *
- * @author lucas
- */
 public class SoundButton extends PauseButton{
     private BufferedImage[][] soundImgs;
     private boolean mouseOver, mousePressed;

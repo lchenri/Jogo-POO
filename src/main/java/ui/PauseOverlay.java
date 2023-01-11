@@ -14,10 +14,6 @@ import utilz.LoadSave;
 import static utilz.Constants.UI.PauseButtons.*;
 import static utilz.Constants.UI.URMButtons.*;
 
-/**
- *
- * @author lucas
- */
 public class PauseOverlay {
 
     private Playing playing;

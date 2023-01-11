@@ -11,10 +11,6 @@ import java.awt.event.MouseEvent;
 import main.Game;
 import ui.MenuButton;
 
-/**
- *
- * @author lucas
- */
 public class State {
 
     protected Game game;
