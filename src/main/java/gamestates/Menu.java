@@ -15,10 +15,6 @@ import main.Game;
 import ui.MenuButton;
 import utilz.LoadSave;
 
-/**
- *
- * @author lucas
- */
 public class Menu extends State implements Statemethods {
 
     private MenuButton[] buttons = new MenuButton[3];

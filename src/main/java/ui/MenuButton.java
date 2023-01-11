@@ -13,10 +13,6 @@ import java.awt.image.BufferedImage;
 import static utilz.Constants.UI.Buttons.*;
 import utilz.LoadSave;
 
-/**
- *
- * @author lucas
- */
 public class MenuButton {
 
     private int xPos, yPos, rowIndex, index; // posicao dos botoes

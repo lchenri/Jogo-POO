@@ -15,10 +15,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import entities.Player;
 
-/**
- *
- * @author lucas
- */
 public class Admin extends JFrame {
 
     private JPanel panel;
@@ -30,10 +26,6 @@ public class Admin extends JFrame {
         draw();
     }
 
-//    private float stringToInt(String input) {
-//
-//        return 0;
-//    }
 
     public void draw() {
         setTitle("Janela de Administrador - Debug");
@@ -50,43 +42,31 @@ public class Admin extends JFrame {
         buttons.setPreferredSize(new Dimension(400, 200));
 
         JButton jumpHeight = new JButton("Altura Pulo");
-        jumpHeight.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                input = JOptionPane.showInputDialog("Coloque um valor que será somado ao valor padrao: ", Player.getJumpMultiplier());
-                value = Float.parseFloat(input);
-                Player.setJump(value);
-            }
+        jumpHeight.addActionListener((ActionEvent ae) -> {
+            input = JOptionPane.showInputDialog("Coloque um valor que será somado ao valor padrao: ", Player.getJumpMultiplier());
+            value = Float.parseFloat(input);
+            Player.setJump(value);
         });
 
         JButton gravity = new JButton("Gravidade");
-        gravity.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                input = JOptionPane.showInputDialog("Coloque um valor que será somado ao valor padrao: ", Player.getGravityMultiplier());
-                value = Float.parseFloat(input);
-                Player.setGravityMultiplier(value);
-            }
+        gravity.addActionListener((ActionEvent ae) -> {
+            input = JOptionPane.showInputDialog("Coloque um valor que será somado ao valor padrao: ", Player.getGravityMultiplier());
+            value = Float.parseFloat(input);
+            Player.setGravityMultiplier(value);
         });
 
         JButton speed = new JButton("Velocidade");
-        speed.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                input = JOptionPane.showInputDialog("Coloque um valor que será somado ao valor padrao: ", Player.getSpeedMultiplier());
-                value = Float.parseFloat(input);
-                Player.setSpeed(value);
-            }
+        speed.addActionListener((ActionEvent ae) -> {
+            input = JOptionPane.showInputDialog("Coloque um valor que será somado ao valor padrao: ", Player.getSpeedMultiplier());
+            value = Float.parseFloat(input);
+            Player.setSpeed(value);
         });
 
-        JButton puloAposColisao = new JButton("PuloAposColisao");
-        puloAposColisao.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                input = JOptionPane.showInputDialog("Coloque um valor que será somado ao valor padrao: ", Player.getFallSpeedMultiplier());
-                value = Float.parseFloat(input);
-                Player.setFallSpeedMultiplier(value);
-            }
+        JButton jumpAfterColision = new JButton("PuloAposColisao");
+        jumpAfterColision.addActionListener((ActionEvent ae) -> {
+            input = JOptionPane.showInputDialog("Coloque um valor que será somado ao valor padrao: ", Player.getFallSpeedMultiplier());
+            value = Float.parseFloat(input);
+            Player.setFallSpeedMultiplier(value);
         });
         
 //                          Exemplo para adicionar novo botão no painel de adm
@@ -103,7 +83,7 @@ public class Admin extends JFrame {
         buttons.add(jumpHeight);
         buttons.add(gravity);
         buttons.add(speed);
-        buttons.add(puloAposColisao);
+        buttons.add(jumpAfterColision);
 //        buttons.add(UPS);
 
         JScrollPane jscroll = new JScrollPane(buttons);

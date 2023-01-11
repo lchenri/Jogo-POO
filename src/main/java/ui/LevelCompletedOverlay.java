@@ -13,10 +13,6 @@ import main.Game;
 import static utilz.Constants.UI.URMButtons.*;
 import utilz.LoadSave;
 
-/**
- *
- * @author pedro
- */
 public class LevelCompletedOverlay {
     
     private Playing playing;

@@ -158,28 +158,5 @@ private Menu menu;
     public Playing getPlaying(){
         return playing;
     }
-    
-//    public static int getFps(){
-//        return Game.fpsModifier;
-//    }
-//    
-//    public static int getUps(){
-//        return Game.upsModifier;
-//    }
-//    
-//    public static void setUps(int value){
-//        Game.upsModifier = value;
-//        Game.upsMod = true; 
-//        if(upsModifier == 200)
-//            Game.upsMod = false;
-//    }
-//    
-//    public static void setFps(int value){
-//        Game.fpsModifier = value;
-//        Game.fpsMod = true;
-//        System.out.println("Modificador do FPS:" + fpsMod);
-//        if(fpsModifier == 120)
-//            Game.fpsMod = false;
-//    }
 
 }

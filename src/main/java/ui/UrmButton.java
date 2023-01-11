@@ -9,10 +9,6 @@ import java.awt.image.BufferedImage;
 import utilz.LoadSave;
 import static utilz.Constants.UI.URMButtons.*;
 
-/**
- *
- * @author lucas
- */
 public class UrmButton extends PauseButton {
     
     private BufferedImage[] imgs;
