@@ -154,7 +154,6 @@ public class Crabby extends Entity {
         int playerTileY = (int)(player.getHitbox().y / TILES_SIZE);
         if(playerTileY == tileY) {
             if(isPlayerInRange(player)) {
-                System.out.println(isSightClear(lvlData, hitbox, player.hitbox, tileY));
                 if(isSightClear(lvlData, hitbox, player.hitbox, tileY))
                     return true;
             }

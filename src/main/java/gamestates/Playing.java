@@ -96,8 +96,11 @@ public class Playing extends State implements Statemethods {
         enemyManager.draw(g);
         if (paused) {
             pauseOverlay.draw(g);
-        } else if(lvlCompleted)
+        } else if(lvlCompleted) {
             levelCompletedOverlay.draw(g);
+        } else if(gameOver) {
+            gameOverOverlay.draw(g);
+        }
     }
     
     public void resetAll(){ //ADICIONAR LVLCOMPLETED = FALSE

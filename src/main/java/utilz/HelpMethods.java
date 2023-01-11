@@ -9,7 +9,6 @@ import java.awt.Color;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
-import main.Game;
 import static utilz.Constants.EnemyConstants.ENEMY;
 import static utilz.Constants.GameConstants.*;
 
