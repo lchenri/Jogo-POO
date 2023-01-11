@@ -1,21 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+//Leonorico Eduardo de Paula Borges (202135032)
+//Lucas Henrique de Araujo Cardoso (202135038)
+//Pedro Lucas Botelho Freitas (202135040)
+
 package gamestates;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import main.Game;
 import entities.Player;
 
 /**
@@ -33,10 +30,10 @@ public class Admin extends JFrame {
         draw();
     }
 
-    private float stringToInt(String input) {
-
-        return 0;
-    }
+//    private float stringToInt(String input) {
+//
+//        return 0;
+//    }
 
     public void draw() {
         setTitle("Janela de Administrador - Debug");

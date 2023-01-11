@@ -1,3 +1,7 @@
+//Leonorico Eduardo de Paula Borges (202135032)
+//Lucas Henrique de Araujo Cardoso (202135038)
+//Pedro Lucas Botelho Freitas (202135040)
+
 /*
 Classe que define o modo de jogo, executando as acoes dos listeners e atualizando a tela de acordo
  */
@@ -11,7 +15,6 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import levels.LevelManager;
 import main.Game;
-import static main.Game.SCALE;
 import ui.LevelCompletedOverlay;
 import java.awt.geom.Rectangle2D;
 import ui.GameOverOverlay;

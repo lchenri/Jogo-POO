@@ -1,6 +1,7 @@
 //Leonorico Eduardo de Paula Borges (202135032)
 //Lucas Henrique de Araujo Cardoso (202135038)
 //Pedro Lucas Botelho Freitas (202135040)
+
 package inputs;
 
 import gamestates.Gamestate;
@@ -8,19 +9,12 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import main.GamePanel;
 
-import static utilz.Constants.Directions.*;
-
 public class KeyboardInputs implements KeyListener {
 
     private GamePanel gamePanel;
 
     public KeyboardInputs(GamePanel gamePanel) {
         this.gamePanel = gamePanel;
-    }
-
-    @Override
-    public void keyTyped(KeyEvent e) {
-
     }
 
     @Override
@@ -52,6 +46,11 @@ public class KeyboardInputs implements KeyListener {
             default:
                 break;
         }
+
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
 
     }
 }

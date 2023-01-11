@@ -1,3 +1,7 @@
+//Leonorico Eduardo de Paula Borges (202135032)
+//Lucas Henrique de Araujo Cardoso (202135038)
+//Pedro Lucas Botelho Freitas (202135040)
+
 package entities;
 
 import gamestates.Playing;
@@ -43,8 +47,6 @@ public class EnemyManager {
         for(Crabby crabby : crabbies) 
             if(crabby.isActive()) {
                 g.drawImage(crabbyArr[crabby.getEnemyState()][crabby.getAniIndex()], (int)crabby.getHitbox().x + crabby.flipX(), (int)crabby.getHitbox().y, CRABBY_WIDTH * crabby.flipW(), CRABBY_HEIGHT, null);
-                //crabby.drawHitbox(g);
-//                crabby.drawAttackBox(g);
             }
     }
     

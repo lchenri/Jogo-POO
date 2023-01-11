@@ -1,9 +1,12 @@
+//Leonorico Eduardo de Paula Borges (202135032)
+//Lucas Henrique de Araujo Cardoso (202135038)
+//Pedro Lucas Botelho Freitas (202135040)
+
 /*
 Classe que representa o menu.
  */
 package gamestates;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -58,10 +61,6 @@ public class Menu extends State implements Statemethods {
     }
 
     @Override
-    public void mouseClicked(MouseEvent e) {
-    }
-
-    @Override
     public void mousePressed(MouseEvent e) {
         for (MenuButton mb : buttons) {
             if (isIn(e, mb)) {
@@ -112,6 +111,10 @@ public class Menu extends State implements Statemethods {
         if(e.getKeyCode() == KeyEvent.VK_G){
             Admin adm = new Admin();
         }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
     }
 
     @Override

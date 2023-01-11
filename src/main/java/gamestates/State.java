@@ -1,3 +1,7 @@
+//Leonorico Eduardo de Paula Borges (202135032)
+//Lucas Henrique de Araujo Cardoso (202135038)
+//Pedro Lucas Botelho Freitas (202135040)
+
 /*
 auxilia qualquer acao do gamestate, facilitando o acesso a alguns metodos
  */

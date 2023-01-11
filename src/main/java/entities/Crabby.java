@@ -1,3 +1,7 @@
+//Leonorico Eduardo de Paula Borges (202135032)
+//Lucas Henrique de Araujo Cardoso (202135038)
+//Pedro Lucas Botelho Freitas (202135040)
+
 package entities;
 
 import java.awt.Color;
@@ -6,7 +10,6 @@ import java.awt.geom.Rectangle2D;
 import main.Game;
 import static utilz.Constants.Directions.*;
 import static utilz.Constants.EnemyConstants.*;
-import static utilz.HelpMethods.*;
 
 public class Crabby extends Enemy {
     

@@ -1,25 +1,13 @@
-
 //Leonorico Eduardo de Paula Borges (202135032)
 //Lucas Henrique de Araujo Cardoso (202135038)
 //Pedro Lucas Botelho Freitas (202135040)
 
 package utilz;
 
-import entities.Crabby;
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
-
 import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.ArrayList;
 import javax.imageio.ImageIO;
-import main.Game;
-import static utilz.Constants.EnemyConstants.CRABBY;
-
 
 public class LoadSave {
     
@@ -34,11 +22,6 @@ public class LoadSave {
     public static final String COMPLETED_IMG = "completed_sprite.png";// ADICIONAR ARQUIVO DE COMPLETED
     public static final String CRABBY_SPRITE = "crabby_sprite.png";
     public static final String STATUS_BAR = "health_power_bar.png";
-    
-    //public static final String PLAYING_BG_IMG = "level_one.png"; //No lugar do name colocar o arquivo imagem FUNDO(Ex: level_one.png)
-    //Na classe playing crie: BufferedImage backgroundImg;
-    //No construtor de playing coloque: LoadSave.GetSpriteAtlas(LoadSave.PLAYING_BG_IMG);
-    //No draw coloque g.drawImage(backgroundImg,0,0, Game.GAME_WIDTH, Game.GAME_HEIGHT,null);
     
     public static BufferedImage GetSpriteAtlas(String nomeArquivo) {
         
@@ -56,15 +39,11 @@ public class LoadSave {
     
     public static BufferedImage[] GetAllLevels(){
 
-        //importando o pacote lvls com suas devidas excecoes evitando erro
-        
-        
+        //importando o pacote lvls com suas devidas excecoes evitando erro  
         //TOFIX: existe um problema nessa parte, pois as imagens que são importadas tem width maior que o game width, e como o lvldata está com array
-        //fixado no game width, que é 26, dá conflito. mudar a dimensao do array lvl data ou mudar a dimensao das imagens das fases.
-        
+        //fixado no game width, que é 26, dá conflito. mudar a dimensao do array lvl data ou mudar a dimensao das imagens das fases.  
         
         File file = new File("res/lvls");
-       
         File[] files = file.listFiles();
         File[] filesSorted = new File[files.length];
        
@@ -74,19 +53,17 @@ public class LoadSave {
                 if(files[j].getName().equals((i +1) + ".png"))
                     filesSorted[i] = files[j];
             }
+        
+        BufferedImage[] imgs = new BufferedImage[filesSorted.length];
 
-       
-       BufferedImage[] imgs = new BufferedImage[filesSorted.length];
-       
-       for(int i = 0; i < imgs.length; i++)
-            try {
-                imgs[i] = ImageIO.read(filesSorted[i]);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-           
-           
-       return imgs;
+        for(int i = 0; i < imgs.length; i++)
+             try {
+                 imgs[i] = ImageIO.read(filesSorted[i]);
+             } catch (IOException ex) {
+                 ex.printStackTrace();
+             }
+
+        return imgs;
     }
    
     

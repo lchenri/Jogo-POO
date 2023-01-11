@@ -1,6 +1,7 @@
 //Leonorico Eduardo de Paula Borges (202135032)
 //Lucas Henrique de Araujo Cardoso (202135038)
 //Pedro Lucas Botelho Freitas (202135040)
+
 package entities;
 
 import gamestates.Playing;
@@ -8,9 +9,6 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import javax.imageio.ImageIO;
 import main.Game;
 import static utilz.Constants.PlayerConstants.*;
 import static utilz.Constants.PlayerConstants.getSpriteAmount;

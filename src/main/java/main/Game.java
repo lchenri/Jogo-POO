@@ -3,19 +3,16 @@
 //Pedro Lucas Botelho Freitas (202135040)
 package main;
 
-
 import gamestates.Gamestate;
 import gamestates.Menu;
 import gamestates.Playing;
 import java.awt.Graphics;
-import utilz.LoadSave;
-
 
 //implementa interface Runnable para executar o loop de jogo numa nova Thread
 public class Game implements Runnable {
 
-    private GameWindow gameWindow; //janela
-    private GamePanel gamePanel; //cena (pintura/jogo)
+    private GameWindow gameWindow;
+    private GamePanel gamePanel;
     private Thread gameThread; //nova thread ("mini-processo")
     private static int FPS_SET = 120; //Quantidade de FPS que o jogo vai rodar
     private static int UPS_SET = 200; //Quantidade entre os updates visando estabilidade
@@ -112,7 +109,6 @@ private Menu menu;
         double deltaU = 0;
         double deltaF = 0;
 
-        //
         //loop
         while (true) {
             long currentTime = System.nanoTime();

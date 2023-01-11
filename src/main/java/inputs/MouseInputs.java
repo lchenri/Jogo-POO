@@ -1,6 +1,7 @@
 //Leonorico Eduardo de Paula Borges (202135032)
 //Lucas Henrique de Araujo Cardoso (202135038)
 //Pedro Lucas Botelho Freitas (202135040)
+
 package inputs;
 
 import gamestates.Gamestate;
@@ -58,18 +59,6 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
     }
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-    }
-
-    @Override
-    public void mouseDragged(MouseEvent e) {
-    }
-
-    @Override
     public void mouseMoved(MouseEvent e) {
         switch (Gamestate.state) {
             case MENU:
@@ -81,6 +70,18 @@ public class MouseInputs implements MouseListener, MouseMotionListener {
             default:
                 break;
         }
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseDragged(MouseEvent e) {
     }
 
 }
